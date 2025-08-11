@@ -1,0 +1,42 @@
+body {
+    background-color: #5e014e;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+    color: #E6E6FA;
+}
+
+.border {
+    border: 1px solid #000;
+    padding: 20px;
+}
+
+.bg-color {
+    background-color: #E6E6FA;
+    background-image: url('image/1.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.m-1 {
+    margin-top: 20%;
+}

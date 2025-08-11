@@ -1,0 +1,49 @@
+body {
+    background-color: rgb(39, 39, 83);
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.d-flex {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.text-center {
+    text-align: center;
+    color: #E6E6FA;
+}
+
+.border-only {
+    border: 2px solid #000;
+}
+
+.border {
+    padding: 50px;
+}
+
+.bg-color {
+    background-color: #B0C4DE;
+    background-image: url('image/images.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+.m-1 {
+    margin-left: 5px;
+}
+
+.m-2 {
+    margin-top: 20%;
+}

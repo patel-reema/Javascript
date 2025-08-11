@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m-1">
+    <h2 class="text-center">BILL CALCULATOR</h2>
+    <div class="container d-flex justify-center">
+        <table class="border bg-color">
+            <tr>
+                <td>Enter your Name: </td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td>Enter your Address: </td>
+                <td><textarea id="address"></textarea></td>
+            </tr>
+            <tr>
+                <td>Enter your Units: </td>
+                <td><input type="number" id="unit"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Create Bill" onclick="return getBill()"></td>
+            </tr>
+        </table>
+
+        <table class="border bg-color">
+            <tr>
+                <td>Name: </td>
+                <td><input type="text" id="nameResult"></td>
+            </tr>
+            <tr>
+                <td>Address: </td>
+                <td><input type="text" id="addressResult"></td>
+            </tr>
+            <tr>
+                <td>Fix Unit: </td>
+                <td><input type="text" value="1 unit = 6 Rupees" id="fixUnit"></td>
+            </tr>
+            <tr>
+                <td>Your Units: </td>
+                <td><input type="number" id="unitResult"></td>
+            </tr>
+            <tr>
+                <td>Amount: </td>
+                <td><input type="number" id="amountResult"></td>
+            </tr>
+            <tr>
+                <td>GST: </td>
+                <td><input type="text" id="taxResult"></td>
+            </tr>
+            <tr>
+                <td>Your Payment: </td>
+                <td><input type="text" id="payResult"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function getBill() {
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var unit = Number(document.getElementById("unit").value);
+
+            document.getElementById("nameResult").value = name;
+            document.getElementById("addressResult").value = address;
+            document.getElementById("unitResult").value = unit;
+
+            var amount = 6 * unit;
+            document.getElementById("amountResult").value = amount;
+
+            var tax = (amount * 9) / 100;
+            document.getElementById("taxResult").value = tax;
+
+            var pay = tax + amount;
+            document.getElementById("payResult").value = pay;
+        }
+    </script>
+</body>
+
+</html>

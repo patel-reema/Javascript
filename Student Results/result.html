@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Results</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m-2">
+    <h2 class="text-center">STUDENTS RESULTS</h2>
+    <div class="container justify-center d-flex ">
+        <table class="border-only border bg-color">
+            <tr>
+                <td>Student Name: </td>
+                <td><input type="text" id="name"></td>
+            </tr>
+            <tr>
+                <td>Student Class: </td>
+                <td><input type="text" id="class"></td>
+            </tr>
+            <tr>
+                <td>Enter the marks of the subjects:
+            </tr>
+            <tr>
+                <td>English: </td>
+                <td><input type="number" id="english"></td>
+            </tr>
+            <tr>
+                <td>Mathematics: </td>
+                <td><input type="number" id="maths"></td>
+            </tr>
+            <tr>
+                <td>Science: </td>
+                <td><input type="number" id="science"></td>
+            </tr>
+            <tr>
+                <td>Social Studies: </td>
+                <td><input type="number" id="social"></td>
+            </tr>
+            <tr>
+                <td>Hindi: </td>
+                <td><input type="number" id="hindi"></td>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Show Results" onclick="return getResults()"></td>
+            </tr>
+        </table>
+
+        <table class="border-only border bg-color">
+            <tr>
+                <td>Name: </td>
+                <td><input type="text" id="studentName"></td>
+            </tr>
+            <tr>
+                <td>Class: </td>
+                <td><input type="text" id="studentClass"></td>
+            </tr>
+            <tr>
+                <td>Max. Marks: </td>
+                <td><input type="text" id="maxMark"></td>
+            </tr>
+            <tr>
+                <td>Min. Marks: </td>
+                <td><input type="text" id="minMark"></td>
+            </tr>
+            <tr>
+                <td>Percentage: </td>
+                <td><input type="number" id="Percentage"></td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        function getResults() {
+            var name = document.getElementById("name").value;
+            var classes = document.getElementById("class").value;
+            var eng = Number(document.getElementById("english").value);
+            var mat = Number(document.getElementById("maths").value);
+            var sci = Number(document.getElementById("science").value);
+            var ss = Number(document.getElementById("social").value);
+            var hin = Number(document.getElementById("hindi").value);
+
+            document.getElementById("studentName").value = name;
+            document.getElementById("studentClass").value = classes;
+
+            var per = ((eng + mat + sci + ss + hin) / 500) * 100;
+            document.getElementById("Percentage").value = per;
+
+            var marks = (eng, mat, sci, ss, hin);
+            var maxMark = Math.max(eng, mat, sci, ss, hin);
+            document.getElementById("maxMark").value = maxMark;
+
+            var marks = (eng, mat, sci, ss, hin);
+            var maxMark = Math.min(eng, mat, sci, ss, hin);
+            document.getElementById("minMark").value = maxMark;
+        }
+    </script>
+</body>
+
+</html>

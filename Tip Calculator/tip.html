@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m-1">
+    <div class="container" align='center'>
+        <table class="bg-color border border-only">
+            <tr>
+                <td>
+                    <label>Bill Amount: </label><br>
+                    <input type="number" id="billAmount">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Tip Percentage (%): </label><br>
+                    <input type="number" id="tipPercent">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Total of people: </label><br>
+                    <input type="number" id="totalPeople">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" id="sq" onclick="return calculateTip()" value="Calculate">
+                </td>
+            </tr>
+
+
+            <tr>
+                <td>Tip per person: </td>
+                <td><input type="number" id="perTip"></td>
+            </tr>
+            <tr>
+                <td>Total per person: </td>
+                <td><input type="number" id="perPerson"></td>
+            </tr>
+            <tr>
+                <td>Total Bill: </td>
+                <td><input type="number" id="totalBill"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function calculateTip() {
+            var billAmount = Number(document.getElementById("billAmount").value);
+            var tipPercent = Number(document.getElementById("tipPercent").value);
+            var totalPeople = Number(document.getElementById("totalPeople").value);
+
+            var countTip = billAmount * (tipPercent / 100);
+            var tipPerson = countTip / totalPeople;
+            document.getElementById("perTip").value = tipPerson;
+
+            var bill = tipPerson * totalPeople; 
+            var totalBill = bill + billAmount;  
+            document.getElementById("totalBill").value = totalBill;
+
+            var perPerson = totalBill / totalPeople; 
+            document.getElementById("perPerson").value = perPerson;
+        }
+    </script>
+</body>
+
+</html>

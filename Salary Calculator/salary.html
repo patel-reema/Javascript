@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="m-1">
+    <h2 class="text-center">SALARY CALCULATOR</h2>
+    <div class="container justify-center d-flex">
+        <table class="bg-color border border-only">
+            <tr>
+                <td>Age: </td>
+                <td><input type="number" id="age"></td>
+
+                <td>Years of Working: </td>
+                <td><input type="number" id="work"></td>
+            </tr>
+            <tr>
+                <td>Job: </td>
+                <td><input type="text" id="job"></td>
+            </tr>
+            <tr>
+                <td>Hours per Day: </td>
+                <td><input type="number" id="hours"></td>
+
+                <td>Workdays per Week: </td>
+                <td><input type="number" id="week"></td>
+            </tr>
+            <tr>
+                <td>Net Salary : </td>
+                <td><input type="number" id="net"></td>
+            </tr>
+            <tr>
+                <td><input type="button" value="Create Salary Overview" onclick = "return calculateSalary();"></td>
+            </tr>
+        </table>
+
+        <table class="bg-color border border-only">
+            <tr>
+                <td><h2 id="title"></h2></td>
+            </tr>
+            <tr>
+                <td>Hourly: </td>
+                <td><input type="number" id="hourSalary"></td>
+            </tr>
+            <tr>
+                <td>Daily: </td>
+                <td><input type="number" id="dailySalary"></td>
+            </tr>
+            <tr>
+                <td>Monthly: </td>
+                <td><input type="number" id="monthSalary"></td>
+            </tr>
+            <tr>
+                <td>Yearly: </td>
+                <td><input type="number" id="yearSalary"></td>
+            </tr>
+            <tr>
+                <td><h2 id="totalSalary"></h2></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <script>
+        function calculateSalary() {
+            var age = Number(document.getElementById("age").value);
+            var work = Number(document.getElementById("work").value);
+            var job = document.getElementById("job").value;
+            var hours = Number(document.getElementById("hours").value);
+            var week = Number(document.getElementById("week").value);
+            var net = Number(document.getElementById("net").value);
+
+            var hourSalary = net / (hours * week * 4);
+            document.getElementById("hourSalary").value = hourSalary;
+
+            var dailySalary = hours * hourSalary;
+            document.getElementById("dailySalary").value = dailySalary;
+
+            var monthSalary = hourSalary * hours * week * 4;
+            document.getElementById("monthSalary").value = monthSalary;
+
+            var yearSalary = monthSalary * 12;
+            document.getElementById("yearSalary").value = yearSalary;
+
+            var pos = document.getElementById("title").innerHTML = "On your job as " + job + ", this is your salary overview";
+            document.getElementById("title").innerHTML = pos;
+
+            var tSalary = work * yearSalary;
+            var totalSalary =  document.getElementById("totalSalary").innerHTML = "For " + work + " years working, your total salary is: " + tSalary;
+            document.getElementById("totalSalary").innerHTML = totalSalary;
+        }
+    </script>
+</body>                                                                                                                 
+
+</html>
