@@ -1,0 +1,19 @@
+Enter Number = <input type="number" id="number1"><input type="number" id="number2">
+<br><br>
+
+<input type="button" value="Compare" onclick="calculate()">
+
+<h2 id="result"></h2>
+
+<script>
+    function calculate() {
+        var num1 = Number(document.getElementById('number1').value);
+        var num2 = Number(document.getElementById('number2').value);
+
+        if (num1 <= num2) {
+            document.getElementById('result').innerHTML = 'Min. Number: ' + num1;
+        } else{
+            document.getElementById('result').innerHTML = 'Min. Number: ' + num2;
+        }
+    }
+</script>

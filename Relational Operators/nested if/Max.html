@@ -1,0 +1,51 @@
+Enter A = <input type="number" id="a"><br><br>
+Enter B = <input type="number" id="b"><br><br>
+Enter C = <input type="number" id="c"><br><br>
+
+<input type="button" value="CHECK" onclick="return showCalculation()">
+<h4 id="max"></h4>
+
+<script>
+    function showCalculation() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+        var c = Number(document.getElementById('c').value);
+
+        document.getElementById('a').value = a;
+        document.getElementById('b').value = b;
+        document.getElementById('c').value = c;
+
+        var maxNo = 0;
+        if (a > b) {
+            if (a > c) {
+                maxNo = 'A is max.';
+            } else {
+                if (a == c) {
+                    maxNo = 'A and C are same.';
+                } else {
+                    maxNo = 'C is max.';
+                }
+            }
+        } else {
+            if (b > c) {
+                if (b == a) {
+                    maxNo = 'A and B are same.';
+                } else {
+                    maxNo = 'B is max.';
+                }
+            } else {
+                if (c == b) {
+                    if (c == a) {
+                        maxNo = 'All are same.';
+                    } else {
+                        maxNo = 'B and C are same.';
+                    }
+                } else {
+                    maxNo = 'C is max.';
+                }
+            }
+        }
+
+        document.getElementById('max').innerHTML = 'Maximun number: ' + maxNo;
+    }
+</script>

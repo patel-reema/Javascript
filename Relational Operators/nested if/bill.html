@@ -1,0 +1,54 @@
+Enter your Units = <input type="number" id="unit"><br><br>
+
+<input type="button" value="CALCULATE" onclick="return showBill()">
+<h4 id="price"></h4>
+<h4 id="amount"></h4>
+<h4 id="amount"></h4>
+<h4 id="gst"></h4>
+<h4 id="totalPay"></h4>
+
+<script>
+    function showBill() {
+        var unit = Number(document.getElementById('unit').value);
+        document.getElementById('unit').value = unit;
+
+        var price = 0;
+        if (unit <= 1000) {
+            if (unit <= 700) {
+                if (unit <= 450) {
+                    if (unit <= 250) {
+                        if (unit <= 100) {
+                            price = 4.95;
+                        }
+                        else {
+                            price = 5.60;
+                        }
+                    }
+                    else {
+                        price = 6.15;
+                    }
+                }
+                else {
+                    price = 6.95;
+                }
+            }
+            else {
+                price = 7.50;
+            }
+        }
+        else {
+            price = 8.15;
+        }
+
+        document.getElementById('price').innerHTML = 'Unit Price: ' + price;
+
+        var amt = unit * price;
+        document.getElementById('amount').innerHTML = 'Amount: ' + amt;
+
+        var gst = (amt * 18) / 100;
+        document.getElementById('gst').innerHTML = 'GST: ' + gst;
+
+        var totalPay = amt + gst;
+        document.getElementById('totalPay').innerHTML = 'Total payment: ' + totalPay;
+    }
+</script>

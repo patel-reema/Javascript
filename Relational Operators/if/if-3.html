@@ -1,0 +1,18 @@
+Enter Height (in feet) = <input type="number" id="height"><br><br>
+
+<input type="button" value="TELL ME" onclick="return calculate()">
+
+<h2 id="result"></h2>
+
+<script>
+    function calculate(){
+        var hei = Number(document.getElementById('height').value);
+
+        if(hei <= 6){
+            document.getElementById('result').innerHTML = 'Height: ' + hei + ' You are short.';
+        }
+        else{
+            document.getElementById('result').innerHTML = 'Height : ' + hei + ' You are tall.';
+        }
+    }
+</script>-+
