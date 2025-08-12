@@ -1,0 +1,14 @@
+Enter dollars (convert into rupees) = <input type="number" id="dollar"><br><br>
+
+<input type="button" value="FIND" onclick="return dollarRupees()">
+<h4 id="result"></h4>
+
+<script>
+    function dollarRupees() {
+        var d = parseInt(document.getElementById('dollar').value);
+
+        var r = d * 87.73;
+        var ans = r;
+        document.getElementById('result').innerHTML = 'Rupees: ' + ans;
+    }
+</script>

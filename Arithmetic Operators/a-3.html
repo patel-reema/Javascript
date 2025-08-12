@@ -1,0 +1,14 @@
+Enter radius = <input type="number" id="r"><br><br>
+
+<input type="button" value="FIND" onclick="return circleArea()">
+<h4 id="result"></h4>
+
+<script>
+    function circleArea() {
+        var radius = parseInt(document.getElementById('r').value);
+
+        var pi = 3.14;
+        var ans = pi * radius * radius;
+        document.getElementById('result').innerHTML = 'Area of circle: ' + ans;
+    }
+</script>

@@ -1,0 +1,15 @@
+Enter a = <input type="number" id="a"><br><br>
+Enter b = <input type="number" id="b"><br><br>
+
+<input type="button" value="FIND" onclick="return abFormula()">
+<h4 id="result"></h4>
+
+<script>
+    function abFormula() {
+        var a = parseInt(document.getElementById('a').value);
+        var b = parseInt(document.getElementById('b').value);
+
+        var ans = a * a + 2 * a * b + b * b;
+        document.getElementById('result').innerHTML = 'a2 + 2ab + b2: ' + ans;
+    }
+</script>

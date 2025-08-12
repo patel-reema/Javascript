@@ -1,0 +1,51 @@
+Enter A = <input type="number" id="a"><br><br>
+Enter B = <input type="number" id="b"><br><br>
+Enter C = <input type="number" id="c"><br><br>
+
+<input type="button" value="CHECK" onclick="return showCalculation()">
+<h4 id="min"></h4>
+
+<script>
+    function showCalculation() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+        var c = Number(document.getElementById('c').value);
+
+        document.getElementById('a').value = a;
+        document.getElementById('b').value = b;
+        document.getElementById('c').value = c;
+
+        var minNo = 0;
+        if (a < b) {
+            if (a < c) {
+                minNo = 'A is min.';
+            } else {
+                if (a == c) {
+                    minNo = 'A and C are same.';
+                } else {
+                    minNo = 'C is min.';
+                }
+            }
+        } else {
+            if (b < c) {
+                if (b == a) {
+                    minNo = 'A and B are same.';
+                } else {
+                    minNo = 'B is min.';
+                }
+            } else {
+                if (c == b) {
+                    if (c == a) {
+                        minNo = 'All are same.';
+                    } else {
+                        minNo = 'B and C are same.';
+                    }
+                } else {
+                    minNo = 'C is min.';
+                }
+            }
+        }
+
+        document.getElementById('min').innerHTML = 'Minimun number: ' + minNo;
+    }
+</script>
