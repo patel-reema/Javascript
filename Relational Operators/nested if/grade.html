@@ -1,0 +1,67 @@
+<h2>Enter the Subjects Marks here.</h2>
+
+English = <input type="number" id="eng"><br><br>
+Mathematics = <input type="number" id="math"><br><br>
+Science = <input type="number" id="sci"><br><br>
+Hindi = <input type="number" id="hin"><br><br>
+
+<input type="button" value="SHOW" onclick="return studentGrade()">
+
+<h4 id="totalMarks"></h4>
+<h4 id="per"></h4>
+<h4 id="yourGrade"></h4>
+
+<script>
+    function studentGrade() {
+        var a = Number(document.getElementById('eng').value);
+        var b = Number(document.getElementById('math').value);
+        var c = Number(document.getElementById('sci').value);
+        var d = Number(document.getElementById('hin').value);
+        var grade = 0;
+
+        document.getElementById('eng').value = a;
+        document.getElementById('math').value = b;
+        document.getElementById('sci').value = c;
+        document.getElementById('hin').value = d;
+
+        var totalMarks = a + b + c + d;
+        document.getElementById('totalMarks').innerHTML = 'Total Marks: ' + totalMarks;
+        var per = (totalMarks / 400) * 100;
+        document.getElementById('per').innerHTML = 'Percentage: ' + per + '%';
+
+        if (per >= 35) {
+            if (per >= 50) {
+                if (per >= 60) {
+                    if (per >= 70) {
+                        if (per >= 90) {
+                            grade = 'A';
+                        }
+                        else {
+                            grade = 'B';
+                        }
+                    }
+                    else {
+                        grade = 'C';
+                    }
+                }
+                else {
+                    grade = 'D';
+                }
+            }
+            else {
+                grade = 'E';
+            }
+        }
+        else {
+            grade = 'F';
+        }
+
+        if (grade === 'F') {
+            document.getElementById('yourGrade').innerHTML = 'Your grade is: ' + grade + ' You have failed..Try next time!';
+        }
+        else {
+            document.getElementById('yourGrade').innerHTML = 'Your grade: ' + grade + ' You have cleared the exam..Congrats!';
+        }
+    }
+
+</script>

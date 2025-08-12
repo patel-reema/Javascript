@@ -1,0 +1,20 @@
+product price = <input type="number" id="price"><br><br>
+product sell = <input type="number" id="sell"><br><br>
+
+<input type="button" value="SHOW" onclick="return calculate()">
+<h2 id="result"></h2>
+<script>
+    function calculate() {
+        var price = Number(document.getElementById('price').value);
+        var sell = Number(document.getElementById('sell').value);
+
+        if (price < sell) {
+            var profit = sell - price;
+            document.getElementById('result').innerHTML = '<span style= "color:green" >Profit: ' + profit + '</span>';
+        }
+        else {
+            var loss = price - sell;
+            document.getElementById('result').innerHTML = '<span style= "color:red" >Loss: ' + loss + '</span>';
+        }
+    }
+</script>
