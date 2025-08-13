@@ -1,0 +1,58 @@
+Select shape = <select id="area" onchange="areaShape()">
+    <option value="">---Select---</option>
+    <option value="1">Circle</option>
+    <option value="2">Triangle</option>
+    <option value="3">Rectangle</option>
+    <option value="4">Square</option>
+</select>
+<br><br>
+
+<div id="inputData"></div>
+<div id="result"></div>
+
+<script>
+    function areaShape() {
+        var area = document.getElementById('area').value;
+
+        if (area == '1') {
+            var cir = 'Enter radius = <input type="number" id="r"><br><br><input type="button" value="calculate" onclick="return circleArea()">';
+            document.getElementById('inputData').innerHTML = cir;
+        } else if (area == '2') {
+            var tri = 'Enter base = <input type="number" id="b"><br><br>Enter height = <input type="number" id="h"><br><br><input type="button" value="calculate" onclick="return triangleArea()">';
+            document.getElementById('inputData').innerHTML = tri;
+        } else if (area == '3') {
+            var rect = 'Enter length = <input type="number" id="l"><br><br>Enter width = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return rectArea()">';
+            document.getElementById('inputData').innerHTML = rect;
+        } else {
+            var sq = 'Enter cm = <input type="number" id="cm"><br><br><input type="button" value="calculate" onclick="return sqArea()">';
+            document.getElementById('inputData').innerHTML = sq;
+        }
+    }
+
+    function circleArea() {
+        var r = Number(document.getElementById('r').value);
+
+        var ans = 3.14 * r * r;
+        document.getElementById('result').innerHTML = 'Area of circle: ' + ans;
+    }
+    function triangleArea() {
+        var b = Number(document.getElementById('b').value);
+        var h = Number(document.getElementById('h').value);
+
+        var ans = (b * h) / 2;
+        document.getElementById('result').innerHTML = 'Area of Triangle: ' + ans;
+    }
+    function rectArea() {
+        var l = Number(document.getElementById('l').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = l * b;
+        document.getElementById('result').innerHTML = 'Area of Rectangle: ' + ans;
+    }
+    function sqArea() {
+        var cm = Number(document.getElementById('cm').value);
+
+        var ans = cm * cm;
+        document.getElementById('result').innerHTML = 'Area of square: ' + ans;
+    }
+</script>

@@ -1,11 +1,11 @@
 Select calculate type = <select id="calculate" onchange="return calculate()">
     <option>---Select---</option>
-    <option id="1">Sum</option>
-    <option id="2">Substract</option>
-    <option id="3">Multiply</option>
-    <option id="4">Divide</option>
+    <option value="1">Sum</option>
+    <option value="2">Substract</option>
+    <option value="3">Multiply</option>
+    <option value="4">Divide</option>
 </select>
-
+<br><br>
 <div id="inputData"></div>
 <h4 id="result"></h4>
 <script>
@@ -14,10 +14,48 @@ Select calculate type = <select id="calculate" onchange="return calculate()">
 
         if (calc == '1') {
             var sum = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return sumNo()">';
-            document.getElementById('inputData').value = sum;
+            document.getElementById('inputData').innerHTML = sum;
         } else if (calc == '2') {
             var sub = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return subNo()">';
-            document.getElementById('inputData').value = sub;
+            document.getElementById('inputData').innerHTML = sub;
+        }else if (calc == '3') {
+            var mul = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return mulNo()">';
+            document.getElementById('inputData').innerHTML = mul;
+        }else {
+            var div = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return divNo()">';
+            document.getElementById('inputData').innerHTML = div;
         }
+    }
+
+    function sumNo() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = a + b;
+        document.getElementById('result').innerHTML = 'Sum: '+ ans;
+    }
+
+    function subNo() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = a - b;
+        document.getElementById('result').innerHTML= 'Substract: '+ ans;
+    }
+
+    function mulNo() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = a * b;
+        document.getElementById('result').innerHTML = 'Multiply: '+ ans;
+    }
+
+    function divNo() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = a / b;
+        document.getElementById('result').innerHTML = 'Divide: '+ ans;
     }
 </script>
