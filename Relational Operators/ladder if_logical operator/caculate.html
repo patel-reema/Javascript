@@ -1,0 +1,23 @@
+Select calculate type = <select id="calculate" onchange="return calculate()">
+    <option>---Select---</option>
+    <option id="1">Sum</option>
+    <option id="2">Substract</option>
+    <option id="3">Multiply</option>
+    <option id="4">Divide</option>
+</select>
+
+<div id="inputData"></div>
+<h4 id="result"></h4>
+<script>
+    function calculate() {
+        var calc = document.getElementById('calculate').value;
+
+        if (calc == '1') {
+            var sum = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return sumNo()">';
+            document.getElementById('inputData').value = sum;
+        } else if (calc == '2') {
+            var sub = 'Enter first number = <input type="number" id="a"><br><br>Enter second number = <input type="number" id="b"><br><br><input type="button" value="calculate" onclick="return subNo()">';
+            document.getElementById('inputData').value = sub;
+        }
+    }
+</script>
