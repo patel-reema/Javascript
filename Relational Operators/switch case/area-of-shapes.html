@@ -1,0 +1,161 @@
+Choose Shape = <select id="selectShape" onchange="return getShape()">
+    <option value="">---select---</option>
+    <option value="1">Square</option>
+    <option value="2">Triangle</option>
+    <option value="3">Rectangle</option>
+    <option value="4">Circle</option>
+</select>
+<br><br>
+<div id="shapeType"></div>
+<div id="result"></div>
+
+<script>
+    function getShape() {
+        var choice = document.getElementById('selectShape').value;
+
+        switch (choice) {
+            case '1':
+                var shape = `Choose the type = <select id="typeSq" onchange="return getSquare()"><option value="">---select---</option><option value="1">Area</option><option value="2">Perimeter</option></select>`;
+                document.getElementById('shapeType').innerHTML = shape;
+                break;
+
+            case '2':
+                var shape = `Choose the type = <select id="typeTri" onchange="return getTri()"><option value="">---select---</option><option value="1">Area</option><option value="2">Perimeter</option></select>`;
+                document.getElementById('shapeType').innerHTML = shape;
+                break;
+
+            case '3':
+                var shape = `Choose the type = <select id="typeRect" onchange="return getRect()"><option value="">---select---</option><option value="1">Area</option><option value="2">Perimeter</option></select>`;
+                document.getElementById('shapeType').innerHTML = shape;
+                break;
+
+            case '4':
+                var shape = `Choose the type = <select id="typeCir" onchange="return getCir()"><option value="">---select---</option><option value="1">Area</option><option value="2">Perimeter</option></select>`;
+                document.getElementById('shapeType').innerHTML = shape;
+                break;
+        }
+    }
+
+    function getSquare() {
+        var sq = document.getElementById('typeSq').value;
+
+        switch (sq) {
+            case '1':
+                var input = `Enter a = <input type="number" id="a"><br><br><input type="button" value="Submit" onclick="return getSqArea()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+
+            case '2':
+                var input = `Enter a = <input type="number" id="a"><br><br><input type="button" value="Submit" onclick="return getSqPeri()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+        }
+    }
+    function getSqArea() {
+        var a = Number(document.getElementById('a').value);
+
+        var ans = a * a;
+        document.getElementById('result').innerHTML = 'Area of Square: ' + ans;
+    }
+    function getSqPeri() {
+        var a = Number(document.getElementById('a').value);
+
+        var ans = 4 * a;
+        document.getElementById('result').innerHTML = 'Perimeter of Square: ' + ans;
+    }
+
+
+
+    function getTri() {
+        var tri = document.getElementById('typeTri').value;
+
+        switch (tri) {
+            case '1':
+                var input = `Enter height = <input type="number" id="a"><br><br>Enter width = <input type="number" id="b"><br><br><input type="button" value="Submit" onclick="return getTriArea()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+
+            case '2':
+                var input = `Enter a side = <input type="number" id="a"><br><br>Enter base = <input type="number" id="b"><br><br>Enter b side = <input type="number" id="c"><br><br><input type="button" value="Submit" onclick="return gettriPeri()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+        }
+    }
+    function getTriArea() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = (a * b) / 2;
+        document.getElementById('result').innerHTML = 'Area of Trinagle: ' + ans;
+    }
+    function gettriPeri() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+        var c = Number(document.getElementById('c').value);
+
+        var ans = a + b + c;
+        document.getElementById('result').innerHTML = 'Perimeter of Trinagle: ' + ans;
+    }
+
+
+
+    function getRect() {
+        var rect = document.getElementById('typeRect').value;
+
+        switch (rect) {
+            case '1':
+                var input = `Enter width = <input type="number" id="a"><br><br>Enter length = <input type="number" id="b"><br><br><input type="button" 
+                value="Submit" onclick="return getRectArea()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+            case '2':
+                var input = `Enter width = <input type="number" id="a"><br><br>Enter length = <input type="number" id="b"><br><br><input type="button" 
+                value="Submit" onclick="return getRectPeri()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+        }
+    }
+    function getRectArea() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = a * b;
+        document.getElementById('result').innerHTML = 'Area of Rectangle: ' + ans;
+    }
+    function getRectPeri() {
+        var a = Number(document.getElementById('a').value);
+        var b = Number(document.getElementById('b').value);
+
+        var ans = 2 * (a * b);
+        document.getElementById('result').innerHTML = 'Area of Rectangle: ' + ans;
+    }
+
+
+    function getCir() {
+        var cir = document.getElementById('typeCir').value;
+
+        switch (cir) {
+            case '1':
+                var input = `Enter radius = <input type="number" id="r"><br><br><input type="button" value="Submit" onclick="return getCirArea()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+
+            case '2':
+                var input = `Enter radius = <input type="number" id="r"><br><br><input type="button" value="Submit" onclick="return getCirPeri()">`;
+                document.getElementById('result').innerHTML = input;
+                break;
+        }
+    }
+    function getCirArea() {
+        var r = Number(document.getElementById('r').value);
+
+        var ans = 3.14 * r * r;
+        document.getElementById('result').innerHTML = 'Area of Circle: ' + ans;
+    }
+    function getCirPeri() {
+        var r = Number(document.getElementById('r').value);
+
+        var ans = 2 * (3.14 * r);
+        document.getElementById('result').innerHTML = 'Perimeter of Circle: ' + ans;
+    }
+</script>

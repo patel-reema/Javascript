@@ -1,0 +1,91 @@
+Select Account type = <select id="accountType" onchange="return getAccount()">
+    <option value="">---Select---</option>
+    <option value="1">Saving Account</option>
+    <option value="2">Current Account</option>
+</select>
+<br><br>
+<div id="transactionType"></div>
+<div id="process"></div>
+<div id="result"></div>
+
+
+<script>
+    var savingAccount = 0;
+    var currentAccount = 10000;
+
+    function getAccount() {
+        var choice = document.getElementById('accountType').value;
+
+        switch (choice) {
+            case '1':
+                var tranType = 'Select Transaction Type = <select id="ttype" onchange="return getTranType()"><option value="">---Select---</option><option value="1">Withdrawl Money</option><option value="2">Deposit Money</option><option value="3">Check Balance</option></select><br><br>';
+                document.getElementById('transactionType').innerHTML = tranType;
+                break;
+
+            case '2':
+                var tranType = 'Select Transaction Type = <select id="ttype" onchange="return getTranType()"><option value="">---Select---</option><option value="1">Withdrawl Money</option><option value="2">Deposit Money</option><option value="3">Check Balance</option></select><br><br>';
+                document.getElementById('transactionType').innerHTML = tranType;
+                break;
+        }
+    }
+
+    function getTranType() {
+        var t = document.getElementById('ttype').value;
+
+        switch (t) {
+            case '1':
+                var withDraw = 'Enter Withdrawl Amount = <input type="number" id="wAmount"><br><br><input type="button" value="Withdraw" onclick="return getWithdrawl()">';
+                document.getElementById('process').innerHTML = withDraw;
+                break;
+
+            case '2':
+                var deposit = 'Enter Deposit Amount = <input type="number" id="dAmount"><br><br><input type="button" value="Deposit" onclick="return getDeposit()">';
+                document.getElementById('process').innerHTML = deposit;
+                break;
+        }
+    }
+
+    function getWithdrawl() {
+        var wAmt = Number(document.getElementById('wAmount').value);
+        var choice = document.getElementById('accountType').value;
+
+        switch (choice) {
+            case '1':
+                if (wAmt > savingAccount) {
+                    document.getElementById('result').innerHTML = '<span style="color: red;">Insufficient Amount.</span>';
+                } else if (wAmt <= savingAccount) {
+                    savingAccount -= wAmt;
+                    document.getElementById('result').innerHTML = '<span style="color: green;">Withdrawl Successfully!</span>' + savingAccount;
+                }
+                break;
+
+            case '2':
+                if (wAmt > currentAccount) {
+                    document.getElementById('result').innerHTML = '<span style="color: red;">Insufficient Amount.</span>';
+                } else if (wAmt <= currentAccount) {
+                    currentAccount -= wAmt;
+                    document.getElementById('result').innerHTML = '<span style="color: green;">Withdrawl Successfully!</span><br>' + currentAccount;
+                }
+                break;
+        }
+    }
+
+    function getDeposit() {
+        var dAmt = Number(document.getElementById('dAmount').value);
+        var choice = document.getElementById('accountType').value;
+
+        switch (choice) {
+            case '1':
+                savingAccount += dAmt;
+                document.getElementById('result').innerHTML = '<span style="color: green;">Deposit Successfully!</span>' + savingAccount;
+                break;
+
+            case '2':
+                currentAccount += dAmt;
+                document.getElementById('result').innerHTML = '<span style="color: green;">Deposit Successfully!</span><br>' + currentAccount;
+                break;
+        }
+
+
+    }
+</script>
