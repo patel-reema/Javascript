@@ -1,0 +1,20 @@
+Enter start value = <input type="number" id="start"><br><br>
+Enter end value = <input type="number" id="end"><br><br>
+Enter gap between numbers = <input type="number" id="gap"><br><br>
+<input type="button" value="show" onclick="return getSeries()">
+
+<div id="result"></div>
+<script>
+    function getSeries() {
+        var start = Number(document.getElementById('start').value);
+        var end = Number(document.getElementById('end').value);
+        var gap = Number(document.getElementById('gap').value);
+        var ans = '';
+
+        while (start <= end) {
+            ans = ans + start + ' ';
+            start += gap;
+        }
+        document.getElementById('result').innerHTML = ans;
+    }
+</script>

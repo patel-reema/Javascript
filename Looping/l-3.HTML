@@ -1,0 +1,29 @@
+Enter start value = <input type="number" id="start">
+Enter end value = <input type="number" id="end"><br><br>
+
+Enter start value = <input type="number" id="start1">
+Enter end value = <input type=" number" id="end1"><br><br>
+
+Enter start value = <input type="number" id="start3">
+Enter end value = <input type=" number" id="end3"><br><br>
+<input type="button" value="show" onclick="return getSeries()">
+
+<script>
+    function getSeries() {
+        var i = Number(document.getElementById('start').value);
+        var j = Number(document.getElementById('end').value);
+        var a = Number(document.getElementById('start1').value);
+        var b = Number(document.getElementById('end1').value);
+        var c = Number(document.getElementById('start3').value);
+        var d = Number(document.getElementById('end3').value);
+
+        while (i <= j && a <= b && c >= d) {
+            console.log(i);
+            console.log(a);
+            console.log(c);
+            i++;
+            a += 5;
+            c -= 1;
+        }
+    }
+</script>
