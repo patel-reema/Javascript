@@ -1,0 +1,197 @@
+Select Food Items: <select id="menu" onchange="return foodMenu()">
+    <option value="">---Select Item---</option>
+    <option value="1">Burger</option>
+    <option value="2">Sandwich</option>
+    <option value="3">Noodles</option>
+    <option value="4">Frankie</option>
+    <option value="5">French Fries</option>
+</select>
+<br><br>
+
+<div id="inputData"></div>
+<h4 id="quantity"></h4>
+<h4 id="dis"></h4>
+<h4 id="result"></h4>
+
+<script>
+    function foodMenu() {
+        var food = document.getElementById('menu').value;
+
+        if (food == '1') {
+            var detail = 'Enter Quantity = <input type="number" id="amt"><br><br><input type="button" value="Submit" onclick="return foodBurger()">';
+            document.getElementById('quantity').innerHTML = detail;
+            var burger = 69;
+            document.getElementById('inputData').innerHTML = '--One burger price: ' + burger;
+        } else if (food == '2') {
+            var detail = 'Enter Quantity = <input type="number" id="amt"><br><br><input type="button" value="Submit" onclick="return foodSandwich()">';
+            document.getElementById('quantity').innerHTML = detail;
+            var sand = 59;
+            document.getElementById('inputData').innerHTML = '--One Sandwich price: ' + sand;
+        } else if (food == '3') {
+            var detail = 'Enter Quantity = <input type="number" id="amt"><br><br><input type="button" value="Submit" onclick="return foodNoodle()">';
+            document.getElementById('quantity').innerHTML = detail;
+            var noodle = 89;
+            document.getElementById('inputData').innerHTML = '---One Noodles bowl price: ' + noodle;
+        } else if (food == '4') {
+            var detail = 'Enter Quantity = <input type="number" id="amt"><br><br><input type="button" value="Submit" onclick="return foodFrankie()">';
+            document.getElementById('quantity').innerHTML = detail;
+            var Frankie = 50;
+            document.getElementById('inputData').innerHTML = '--One Frankie price: ' + Frankie;
+        } else {
+            var detail = 'Enter Quantity = <input type="number" id="amt"><br><br><input type="button" value="Submit" onclick="return foodFries()">';
+            document.getElementById('quantity').innerHTML = detail;
+            var fries = 99;
+            document.getElementById('inputData').innerHTML = '--One French Fries price: ' + fries;
+        }
+    }
+
+    function foodBurger() {
+        var amt = Number(document.getElementById('amt').value);
+        var burger = 69;
+
+        if (price >= 250 && price <= 400) {
+            var price = amt * burger;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (10 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 400 && price <= 550) {
+            var price = amt * burger;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (18 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 550 && price <= 700) {
+            var price = amt * burger;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (25 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 700 && price <= 1000) {
+            var price = amt * burger;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (27 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else {
+            var price = amt * burger;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+        }
+    }
+
+    function foodSandwich() {
+        var amt = Number(document.getElementById('amt').value);
+        var sand = 59;
+
+        if (price >= 250 && price <= 400) {
+            var price = amt * sand;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (10 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 400 && price <= 550) {
+            var price = amt * sand;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (18 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 550 && price <= 700) {
+            var price = amt * sand;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (25 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 700 && price <= 1000) {
+            var price = amt * sand;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (27 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else {
+            var price = amt * sand;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+        }
+    }
+
+    function foodNoodle() {
+        var amt = Number(document.getElementById('amt').value);
+        var noodle = 89;
+
+        if (price >= 250 && price <= 400) {
+            var price = amt * noodle;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (10 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 400 && price <= 550) {
+            var price = amt * noodle;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (18 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 550 && price <= 700) {
+            var price = amt * noodle;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (25 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 700 && price <= 1000) {
+            var price = amt * noodle;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (27 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else {
+            var price = amt * noodle;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+        }
+    }
+
+    function foodFrankie(){
+        var amt = Number(document.getElementById('amt').value);
+        var frank = 50;
+
+        if (price >= 250 && price <= 400) {
+            var price = amt * frank;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (10 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 400 && price <= 550) {
+            var price = amt * frank;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (18 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 550 && price <= 700) {
+            var price = amt * frank;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (25 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 700 && price <= 1000) {
+            var price = amt * frank;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (27 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else {
+            var price = amt * frank;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+        }
+    }
+
+    function foodFries(){
+        var amt = Number(document.getElementById('amt').value);
+        var fries = 99;
+
+        if (price >= 250 && price <= 400) {
+            var price = amt * fries;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (10 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 400 && price <= 550) {
+            var price = amt * fries;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (18 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 550 && price <= 700) {
+            var price = amt * fries;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (25 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else if (price > 700 && price <= 1000) {
+            var price = amt * fries;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+            var dis = price * (27 / 100);
+            document.getElementById('dis').innerHTML = 'Total discount: ' + dis;
+        } else {
+            var price = amt * fries;
+            document.getElementById('result').innerHTML = 'Total Payment: ' + price;
+        }
+    }
+</script>

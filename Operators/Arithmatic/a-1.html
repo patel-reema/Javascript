@@ -1,0 +1,15 @@
+Enter width = <input type="number" id="a"><br><br>
+Enter height = <input type="number" id="b"><br><br>
+
+<input type="button" value="FIND" onclick="return rectangleArea()">
+<h4 id="result"></h4>
+
+<script>
+    function rectangleArea() {
+        var a = parseInt(document.getElementById('a').value);
+        var b = parseInt(document.getElementById('b').value);
+
+        var ans = a * b;
+        document.getElementById('result').innerHTML = 'Area of Rectangle: ' + ans;
+    }
+</script>

@@ -10,6 +10,7 @@
 
 <body class="m-1">
     <div class="container" align='center'>
+        <h2 class="text-center">TIP CALCULATOR</h2>
         <table class="bg-color border border-only">
             <tr>
                 <td>
@@ -34,20 +35,22 @@
                     <input type="button" id="sq" onclick="return calculateTip()" value="Calculate">
                 </td>
             </tr>
-
-
-            <tr>
-                <td>Tip per person: </td>
-                <td><input type="number" id="perTip"></td>
-            </tr>
-            <tr>
-                <td>Total per person: </td>
-                <td><input type="number" id="perPerson"></td>
-            </tr>
-            <tr>
-                <td>Total Bill: </td>
-                <td><input type="number" id="totalBill"></td>
-            </tr>
+        </table>
+        <table class="design align-center justify-center">
+            <div class="">
+                <tr>
+                    <td>Tip per person: </td>
+                    <td><input type="number" id="perTip"></td>
+                </tr>
+                <tr>
+                    <td>Total per person: </td>
+                    <td><input type="number" id="perPerson"></td>
+                </tr>
+                <tr>
+                    <td>Total Bill: </td>
+                    <td><input type="number" id="totalBill"></td>
+                </tr>
+            </div>
         </table>
     </div>
     <script>
@@ -60,11 +63,11 @@
             var tipPerson = countTip / totalPeople;
             document.getElementById("perTip").value = tipPerson;
 
-            var bill = tipPerson * totalPeople; 
-            var totalBill = bill + billAmount;  
+            var bill = tipPerson * totalPeople;
+            var totalBill = bill + billAmount;
             document.getElementById("totalBill").value = totalBill;
 
-            var perPerson = totalBill / totalPeople; 
+            var perPerson = totalBill / totalPeople;
             document.getElementById("perPerson").value = perPerson;
         }
     </script>

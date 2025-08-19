@@ -1,0 +1,14 @@
+Enter metres (convert into Km) = <input type="number" id="metre"><br><br>
+
+<input type="button" value="FIND" onclick="return meterKm()">
+<h4 id="result"></h4>
+
+<script>
+    function meterKm() {
+        var m = parseInt(document.getElementById('metre').value);
+
+        var Km = m/1000;
+        var ans = Km;
+        document.getElementById('result').innerHTML = 'Km: ' + ans;
+    }
+</script>

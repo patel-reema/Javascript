@@ -23,6 +23,7 @@ body {
 .border-only {
     border: 2px solid #000;
     border-radius: 5%;
+    box-shadow: 1px 5px 5px 1px #E6E6FA;
 }
 
 .border {
@@ -39,11 +40,20 @@ body {
     margin-top: 10%;
 }
 
-#sq{
+#sq {
     padding: 8px;
     margin: 5px 0 5px 0;
     background-color: #000;
     color: #E6E6FA;
     border: 0;
     border-radius: 10%;
+}
+
+.design {
+    margin: 30px;
+    background-color: #addcf5;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 1px 5px 5px 0px #E6E6FA;
 }

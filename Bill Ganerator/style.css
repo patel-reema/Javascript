@@ -1,5 +1,5 @@
 body {
-    background-color: #5e014e;
+    background-color: #cae4e8;
 }
 
 .container {
@@ -22,7 +22,7 @@ body {
 
 .text-center {
     text-align: center;
-    color: #E6E6FA;
+    color: #000;
 }
 
 .border {
@@ -39,4 +39,28 @@ body {
 
 .m-1 {
     margin-top: 20%;
+}
+
+.m-2{
+    margin: 10px;
+    padding: 50px;
+}
+
+.m-3{
+    margin: 10px;
+    padding: 5px;
+}
+
+.b-1 {
+    margin-top: 5%;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #5e014e;
+    color: #E6E6FA;
+    border: 0;
+}
+
+.shadow{
+    border-radius: 10px;
+    box-shadow:2px 1px 5px 0px #000;
 }
