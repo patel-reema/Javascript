@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-color">
+    <div class="container cont d-flex">
+        <div>
+            <input type="button" class="btn-game" id="newGame" value="New Game!" onclick="resetGame()">
+        </div>
+        <div class="textwhite right">
+            <span class="high">High Score: </span>
+            <span id="highScore">0</span>
+        </div>
+    </div>
+
+    <div class="container guess">
+        <h1 class="title">Guess the Number!</h1>
+        <div class="box" id="randomNumber">?</div>
+        <p class="statement">Between 1 to 100</p>
+    </div>
+
+    <div class="container1 d-flex">
+        <section class="game-left">
+            <div>
+                <span class="arrow">>></span>
+                <input type="number" id="insertName" class="textcenter insert" placeholder="Insert your number">
+                <span class="arrow">
+                    << </span>
+            </div>
+            <button class="btn-check" onclick="checkNumber()">CHECK</button>
+
+            <div class="d-flex textadjust">
+                <span class="textwhite max">Max. Tries: </span>
+                <div class="d-flex" id="sq">
+                    <div class="sq1 m"></div>
+                    <div class="sq2"></div>
+                    <div class="sq3"></div>
+                    <div class="sq4"></div>
+                    <div class="sq5"></div>
+                </div>
+            </div>
+
+            <div class="textwhite">
+                <span class="score">Score: </span>
+                <span id="score">0</span>
+            </div>
+        </section>
+
+        <section class="game-right">
+            <div class="msg">Message Box: </div>
+            <div class="msgBox" id="result"></div>
+        </section>
+    </div>
+
+
+    <script>
+        var randomNumber;
+        var score = 0;
+        var maxTries = 5;
+        var highScore = 0;
+
+        var resetGame = () => {
+            randomNumber = Math.floor(Math.random() * 100 + 1);
+
+            document.querySelector('.box').textContent = '?';
+            document.getElementById('insertName').value = '';
+            document.getElementById('result').textContent = '';
+
+            maxTries = 5;
+            score = 0;
+            updateMaxtri();
+            updateScore();
+        };
+
+        var updateMaxtri = () => {
+            var squares = document.querySelectorAll('#sq div');
+            for (var i = 0; i < squares.length; i++) {
+                squares[i].style.backgroundColor = (i < maxTries) ? "#088c23" : "red";
+            }
+        };
+
+        var updateScore = () => {
+            document.getElementById('score').innerHTML = score;
+        };
+
+        var updateHighScore = () => {
+            if (score > highScore) {
+                highScore = score;
+                document.getElementById('highScore').innerHTML = highScore;
+            }
+        };
+
+        var checkNumber = () => {
+            if (maxTries === 0) return;
+
+            var insertNumber = Number(document.getElementById('insertName').value);
+
+            if (!insertNumber || insertNumber < 1 || insertNumber > 100) {
+                document.getElementById('result').innerHTML = '>> Please Enter the number between 1 to 100..';
+                return;
+            }
+
+            if (insertNumber === randomNumber) {
+                document.getElementById('result').innerHTML = '>> WOW !! You Got the Right Number..';
+                document.getElementById('randomNumber').textContent = randomNumber;
+                score += maxTries;
+                updateScore();
+                updateHighScore();
+                maxTries = 0;
+                updateMaxtri();
+                return;
+            }
+
+            maxTries--;
+            if (insertNumber > randomNumber) {
+                document.getElementById('result').innerHTML = '>> You are too High..';
+            } else {
+                document.getElementById('result').innerHTML = '>> You are too Low..';
+            }
+
+            updateMaxtri();
+
+            if (maxTries === 0) {
+                document.getElementById('result').textContent += ' >> Game Over! Number was ' + randomNumber;
+                document.querySelector('.box').textContent = randomNumber;
+                updateHighScore();
+            }
+        };
+
+        // initialize game
+        resetGame();
+
+
+    </script>
+</body>
+
+</html>
