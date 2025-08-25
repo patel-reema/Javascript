@@ -1,0 +1,25 @@
+<script>
+    var record = [1, 2, 3.5, 6.8, 'money', 'goal', true, false, null, 3, 4];
+
+    var data = record.filter((value, i) => {
+        if (typeof value == 'number') {
+            return value;
+        }
+    })
+    console.log(data);
+
+    var data = record.filter((value, i) => {
+        if (typeof value == 'string') {
+            return value;
+        }
+    })
+    console.log(data);
+
+    var data = record.filter((value, i) => {
+        if (typeof value == 'boolean') {
+            return value;
+        }
+    })
+    console.log(data);
+
+</script>
