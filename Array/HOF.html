@@ -1,0 +1,71 @@
+<div id="result"></div>
+<div id="ans"></div>
+
+<input type="button" value="some" onclick="return someData()">
+<input type="button" value="every" onclick="return everyData()">
+<input type="button" value="includes" onclick="return includesData()">
+<input type="button" value="findIndex" onclick="return findIndexData()">
+<input type="button" value="indexOf" onclick="return indexOfData()">
+<input type="button" value="foreach" onclick="return forEachData()">
+<input type="button" value="map" onclick="return mapData()">
+<input type="button" value="filter" onclick="return filterData()">
+
+
+<script>
+    var data = [10, 'name', 6.5, null, 'money', true, 50, 1.15, 'goal', 100];
+    document.getElementById('result').innerHTML = data;
+
+    function someData() {
+        var num = data.some(v => typeof v == 'number');
+        document.getElementById('ans').innerHTML = num;
+    }
+
+    function everyData() {
+        var num = data.every(v => typeof v == 'number');
+        document.getElementById('ans').innerHTML = num;
+    }
+
+    function includesData() {
+        var num = data.includes(20);
+        document.getElementById('ans').innerHTML = num;
+    }
+
+    function findIndexData() {
+        var num = data.findIndex(v => typeof v == 'number');
+        document.getElementById('ans').innerHTML = 'Index of value: ' + num;
+    }
+
+    function indexOfData() {
+        var num = data.indexOf('name');
+        document.getElementById('ans').innerHTML = 'Index of value: ' + num;
+    }
+
+    function forEachData() {
+        var str = '';
+        data.forEach((v, i) => {
+            str += `Position= ${i} / Value= ${v} / Datatype= ${typeof v}<br>`;
+        });
+        document.getElementById('ans').innerHTML = str;
+    }
+
+    function mapData() {
+        var record = data.map((v, i) => {
+            if (typeof v == 'string') {
+                return v;
+            } else {
+                return 0;
+            }
+        });
+        document.getElementById('ans').innerHTML = record;
+    }
+
+    function filterData() {
+        var record = data.filter((v, i) => {
+            if (typeof v == 'string') {
+                return v;
+            }
+        });
+        document.getElementById('ans').innerHTML = record;
+    }
+
+</script>

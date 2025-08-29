@@ -1,0 +1,61 @@
+<div id="result"></div>
+<div id="ans"></div>
+
+<input type="button" value="LENGTH" onclick="return lengthData()"><br>
+<input type="button" value="PUSH" onclick="return pushData()"><br>
+<input type="button" value="POP" onclick="return popData()"><br>
+<input type="button" value="SHIFT" onclick="return shiftData()"><br>
+<input type="button" value="UNSHIFT" onclick="return unshiftData()"><br>
+<input type="button" value="SPLICE" onclick="return spliceData()"><br>
+<input type="button" value="SLICE" onclick="return sliceData()"><br>
+<script>
+    var data = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+    document.getElementById('result').innerHTML = data;
+
+    function lengthData() {
+        data.length;
+        document.getElementById('ans').innerHTML = "Length: " + data.length;
+    }
+
+    function pushData() {
+        var push = prompt('Enter your number: ');
+
+        data.push(push);
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function popData() {
+        data.pop();
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function shiftData(){
+        data.shift();
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function unshiftData(){
+        var sh = prompt('Enter your number: ');
+
+        data.unshift(sh);
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function spliceData(){
+        var ind = prompt('Enter index position: ');
+        var amt = prompt('Enter how many elements you want to delete: ');
+        var add = prompt('Enter element to add: ');
+
+        data.splice(ind, amt, add);
+        document.getElementById('result').innerHTML = data;
+    }
+
+    function sliceData(){
+        var a = prompt('Enter first index number: ');
+        var b = prompt('Enter second index number: ');
+
+        var subArray = data.slice(a, b);
+        document.getElementById('ans').innerHTML = subArray;
+    }
+
+</script>
