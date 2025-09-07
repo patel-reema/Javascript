@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="slider">
+        <img id="slide" src="images/1.webp">
+
+        <button id="prev">&#10094;</button>
+        <button id="next">&#10095;</button>
+    </div>
+
+    <script>
+        let pics = [
+            "images/1.webp",
+            "images/2.webp",
+            "images/3.webp",
+            "images/4.webp"
+        ];
+
+        let i = 0;
+        let slide = document.getElementById("slide");
+
+        document.getElementById("next").onclick = () => {
+            i = (i + 1) % pics.length;
+            slide.src = pics[i];
+        };
+
+        document.getElementById("prev").onclick = () => {
+            i = (i - 1 + pics.length) % pics.length;
+            slide.src = pics[i];
+        };
+    </script>
+</body>
+
+</html>

@@ -10,6 +10,9 @@
 
 <body>
     <h1>Tic Tac Toe</h1>
+    <div id="msg-box">
+        <div id="msg"></div>
+    </div>
     <div class="container">
         <div class="game">
             <button class="box"></button>
@@ -26,9 +29,91 @@
     <input type="button" id="reset-btn" value="Reset Game" onclick="return resetGame()">
 
     <script>
-        var box = document.querySelector('.box').value;
+        var resetGame = () => {
+            turnTo0 = true;
+            msg.innerText = '';
+            btnEnabled();
+        }
+        var boxes = document.querySelectorAll('.box');
+        var msg = document.getElementById('msg');
+        var msgBox = document.getElementById('msg-box');
 
-        
+        var turnTo0 = true;
+        var winChances = [
+            [0, 1, 2],
+            [3, 4, 5],
+            [6, 7, 8],
+            [0, 3, 6],
+            [1, 4, 7],
+            [2, 5, 8],
+            [0, 4, 8],
+            [2, 4, 6]
+        ];
+
+        boxes.forEach((box) => {
+            box.addEventListener('click', () => {
+                if (turnTo0) {
+                    box.innerText = "O";
+                    turnTo0 = false;
+                } else {
+                    box.innerText = "X";
+                    turnTo0 = true;
+                }
+                box.disabled = true;
+                checkWinner();
+            });
+        });
+
+        var checkWinner = () => {
+            for (p of winChances) {
+                var p0 = boxes[p[0]].innerText;
+                var p1 = boxes[p[1]].innerText;
+                var p2 = boxes[p[2]].innerText;
+
+                if (p0 !== '' && p1 !== '' && p2 !== '') {
+                    if (p0 == p1 && p1 == p2) {
+                        showWinner(p0);
+                        return;
+                    }
+                }
+            }
+
+            var allboxes = true;
+            for (var i = 0; i < boxes.length; i++) {
+                if (boxes[i].innerText == '') {
+                    allboxes = false;
+                    break;
+                }
+            };
+
+            if (allboxes) {
+                showTie();
+            };
+        };
+
+        var btnDisabled = () => {
+            for (var box of boxes) {
+                box.disabled = true;
+            };
+        }
+
+        var showWinner = (winner) => {
+            msg.innerHTML = `Congrutulations!!. Winner is ${winner}`;
+            btnDisabled();
+        }
+
+        var showTie = () => {
+            msg.innerHTML = `Sorry!!. No one wins`;
+            btnDisabled();
+        }
+
+        var btnEnabled = () => {
+            for (var box of boxes) {
+                box.disabled = false;
+                box.innerText = '';
+            }
+        }
+
     </script>
 </body>
 
