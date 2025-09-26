@@ -1,0 +1,63 @@
+body {
+    background-color: rgb(5, 41, 41);
+    height: 100vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#name,
+#password,
+#name1,
+#password1,
+#name2,
+#password2,
+#name3,
+#password3,
+#name4,
+#password4,
+#see {
+    padding: 5px;
+    margin: 8px;
+}
+
+#button,
+#button1,
+#button2,
+#button3,
+#button4 {
+    padding: 5px;
+    margin: 5px;
+    font-weight: 800;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.m-1 {
+    background: rgb(172, 182, 182);
+    opacity: 0.8;
+    padding: 15px;
+    margin: 0 10px 0 10px;
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+h2 {
+    font-size: 30px;
+    color: white;
+    font-weight: 700;
+}

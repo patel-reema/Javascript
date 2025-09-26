@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in / Log in</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Login / Sign in</h2>
+    <div class="container d-flex">
+        <div class="m-1">
+            <input type="text" id="name" placeholder="Enter your username"><br><br>
+            <input type="password" id="password" placeholder="Enter your password"><button id="see">See
+                Password</button>
+            <br><br>
+            <button id="button">Sign in</button>
+            <p id="msg"></p>
+        </div>
+        <div class="m-1">
+            <input type="text" id="name1" placeholder="Enter your username"><br><br>
+            <input type="password" id="password1" placeholder="Enter your password"><br><br>
+            <button id="button1">Sign in</button>
+            <p id="msg1"></p>
+        </div>
+        <div class="m-1">
+            <input type="text" id="name2" placeholder="Enter your username"><br><br>
+            <input type="password" id="password2" placeholder="Enter your password"><br><br>
+            <button id="button2">Sign in</button>
+            <p id="msg2 "></p>
+        </div>
+        <div class="m-1">
+            <input type="text" id="name3" placeholder="Enter your username"><br><br>
+            <input type="password" id="password3" placeholder="Enter your password">
+            <label><input type="checkbox" id="showButton">Show Password</label><br><br>
+            <button id="button3">Sign in</button>
+            <p id="msg3"></p>
+        </div>
+        <div class="m-1">
+            <input type="text" id="name4" placeholder="Enter your username"><br><br>
+            <input type="password" id="password4" placeholder="Enter your password">
+            <p id="pw" style="color: black; opacity: 0.2;"></p>
+            <button id="button4">Sign in</button>
+            <p id="msg4"></p>
+        </div>
+    </div>
+
+
+    <script>
+        var name = document.getElementById('name');
+        var pass = document.getElementById('password');
+        var passButton = document.getElementById('see');
+        var signButton = document.getElementById('button');
+        var msg = document.getElementById('msg');
+        var t = true;
+
+        passButton.addEventListener('click', () => {
+            if (t) {
+                pass.type = 'text';
+                t = false;
+            } else {
+                pass.type = 'password';
+                t = true;
+            }
+        });
+
+        signButton.addEventListener('click', () => {
+            if (name.value == '' || pass.value == '') {
+                msg.style.color = 'red';
+                msg.innerText = 'Error! All fields are required.';
+            } else {
+                msg.style.color = 'green';
+                msg.innerText = 'Sign in successfully.';
+            }
+        });
+
+
+
+        var name1 = document.getElementById('name1');
+        var pass1 = document.getElementById('password1');
+        var signButton1 = document.getElementById('button1');
+        var msg1 = document.getElementById('msg1');
+
+        pass1.addEventListener('mousedown', () => {
+            pass1.type = 'text';
+        });
+
+        pass1.addEventListener('mouseup', () => {
+            pass1.type = 'password';
+        });
+
+        signButton1.addEventListener('click', () => {
+            if (name1.value == '' || pass1.value == '') {
+                msg1.style.color = 'red';
+                msg1.innerText = 'Error! All fields are required.';
+            } else {
+                msg1.style.color = 'green';
+                msg1.innerText = 'Sign in successfully.';
+            }
+        })
+
+
+
+        var name2 = document.getElementById('name2');
+        var pass2 = document.getElementById('password2');
+        var signButton2 = document.getElementById('button2');
+        var msg2 = document.getElementById('msg2');
+
+        pass2.addEventListener('mouseenter', () => {
+            pass2.type = 'text';
+        });
+
+        pass2.addEventListener('mouseleave', () => {
+            pass2.type = 'password';
+        });
+
+        signButton2.addEventListener('click', () => {
+            if (name2.value == '' || pass2.value == '') {
+                msg2.style.color = 'red';
+                msg2.innerText = 'Error! All fields are required.';
+            } else {
+                msg2.style.color = 'green';
+                msg2.innerText = 'Sign in successfully.';
+            }
+        });
+
+
+
+        var name3 = document.getElementById('name3');
+        var pass3 = document.getElementById('password3');
+        var showButton = document.getElementById('showButton');
+        var signButton3 = document.getElementById('button3');
+        var msg3 = document.getElementById('msg3');
+        var t3 = true;
+
+        showButton.addEventListener('change', () => {
+            if (t3) {
+                pass3.type = 'text';
+                t3 = false;
+            } else {
+                pass3.type = 'password';
+                t3 = true;
+            }
+        });
+
+        signButton3.addEventListener('click', () => {
+            if (name3.value == '' || pass3.value == '') {
+                msg3.style.color = 'red';
+                msg3.innerText = 'Error! All fields are required.';
+            } else {
+                msg3.style.color = 'green';
+                msg3.innerText = 'Sign in successfully.';
+            }
+        });
+
+        var name4 = document.getElementById('name4');
+        var pass4 = document.getElementById('password4');
+        var pw = document.getElementById('pw');
+        var signButton4 = document.getElementById('button4');
+        var msg4 = document.getElementById('msg4');
+
+        pass4.addEventListener('input', () => {
+            if (pass4.value == '') {
+                pw.innerText = '';
+            } else {
+                pw.innerText = pass4.value;
+            }
+        });
+
+        signButton4.addEventListener('click', () => {
+            if (name4.value == '' || pass4.value == '') {
+                msg4.style.color = 'red';
+                msg4.innerText = 'Error! All fields are required.';
+            } else {
+                msg4.style.color = 'green';
+                msg4.innerText = 'Sign in successfully.';
+            }
+        });
+
+    </script>
+</body>
+
+</html>

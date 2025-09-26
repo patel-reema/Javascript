@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div>
+        <img id="img" src="img/1.jpeg" alt="">
+        <p id="quote"></p>
+        <p id="name"></p>
+        <button id="prev">PREV</button>
+        <button id="next">NEXT</button>
+    </div>
+
+    <script>
+        var img = document.getElementById('img');
+        var quo = document.getElementById('quote');
+        var author = document.getElementById('name');
+        var next = document.getElementById('next');
+        var prev = document.getElementById('prev');
+
+        var quotes = [
+            {
+                img: 'img/1.jpeg',
+                quote: 'The future belongs to those who believe in the beauty of their dreams.',
+                name: 'Eleanor Roosevelt'
+            },
+            {
+                img: 'img/2.jpeg',
+                quote: 'Happiness depends upon ourselves.',
+                name: 'Aristotlet'
+            },
+            {
+                img: 'img/3.jpeg',
+                quote: 'In the middle of every difficulty lies opportunity.',
+                name: 'Albert Einstein'
+            },
+            {
+                img: 'img/4.jpeg',
+                quote: 'Success is not final, failure is not fatal: it is the courage to continue that counts.',
+                name: 'inston Churchill'
+            },
+            {
+                img: 'img/5.jpeg',
+                quote: 'Do what you can, with what you have, where you are.',
+                name: 'Theodore Roosevelt'
+            }
+        ];
+
+        var ind = 0;
+        function showQuote(i) {
+            img.src = quotes[i].img;
+            quo.innerText = quotes[i].quote;
+            author.innerText = "- " + quotes[i].name;
+        }
+
+        showQuote(ind);
+
+        next.addEventListener('click', () => {
+            ind++;
+            if (ind >= quotes.length) {
+                ind = 0;
+            }
+            showQuote(ind);
+        })
+
+        prev.addEventListener('click', () => {
+            --ind;
+            if (ind < 0) {
+                ind = quotes.length - 1;
+            }
+            showQuote(ind);
+        })
+
+    </script>
+</body>
+
+</html>
