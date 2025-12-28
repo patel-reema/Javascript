@@ -1,27 +1,139 @@
-<div id="pdtData" style="display: flex; flex-wrap: wrap;"></div>
+<!DOCTYPE html>
+<html lang="en">
 
-<script>
-    fetch('https://fakestoreapi.com/products')
-        .then(async res => {
-            var productList = await res.json();
-            var pdt = '';
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
 
-            productList.map((v) => {
-                pdt += `<a href="javascript:void(0)" style='text-decoration: none; ' onclick="return pdtPage('${v.id}')"><div style="width: 200px; height: 250px; background-color: aqua; margin: 5px; padding: 10px;">`
-                pdt += `<img src="${v.image}" height="100px" width="100px" style="margin: 8px;" alt="">`
-                pdt += `<h2 style='margin: 5px; font-size: 14px'>${v.title}</h2>`
-                pdt += `<h2>Rs.${v.price}</h2>`
-                pdt += `</div></a>`
-            })  
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #3e476c;
+            color: #333;
+        }
 
-            document.getElementById('pdtData').innerHTML = pdt;
-        })
-        .catch((err) => {
-            alert('Something went Wrong!!' + err);
-        })
+        header {
+            background: #5c6588;
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    function pdtPage(id) {
-        localStorage.setItem('productId', JSON.stringify(id));
-        window.location = 'pdtPage.html';
-    }
-</script>
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background: white;
+            color: #3e476c;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+
+        #pdtData {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .card {
+            width: 200px;
+            height: 260px;
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 12px rgb(150, 149, 149);
+        }
+
+        .card img {
+            height: 100px;
+            width: 100px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .card h2 {
+            font-size: 14px;
+            margin: 5px 0;
+        }
+
+        .price {
+            color: #3e476c;
+        }
+
+        .title {
+            color: #3e476c;
+            font-weight: 800;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="cartPage.html">My Cart</a>
+        </div>
+
+        <a href="logInPage.html" class="login-btn">Login</a>
+    </header>
+
+    <div id="pdtData"></div>
+
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(async res => {
+                var productList = await res.json();
+                var pdt = '';
+
+                productList.map((v) => {
+                    pdt += `<a href="javascript:void(0)" style="text-decoration:none" onclick="return pdtPage('${v.id}')">
+                        <div class="card">
+                            <img src="${v.image}" alt="">
+                            <h2 class="title">${v.title}</h2>
+                            <h2 class="price">Rs. ${v.price}</h2>
+                        </div>
+                    </a>
+                    `;
+                })
+
+                document.getElementById('pdtData').innerHTML = pdt;
+            })
+            .catch((err) => {
+                alert('Something went Wrong!!' + err);
+            })
+
+        function pdtPage(id) {
+            localStorage.setItem('productId', JSON.stringify(id));
+            window.location = 'pdtPage.html';
+        }
+    </script>
+
+</body>
+
+</html>

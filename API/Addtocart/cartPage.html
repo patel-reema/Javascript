@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>My Cart</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #3e476c;
+            padding: 20px;
+            color: #d2d6e6;
+            text-align: center;
+        }
+
+        header {
+            background: #5c6588;
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background: white;
+            color: #3e476c;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #323b65;
+            color: white;
+        }
+
+        tr {
+            color: #3e476c;
+        }
+
+        img {
+            height: 50px;
+        }
+
+        button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        h3 {
+            text-align: right;
+            margin-top: 15px;
+        }
+
+        .button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ddd;
+            color: #3e476c;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="cartPage.html">My Cart</a>
+        </div>
+
+        <a href="logInPage.html" class="login-btn">Login</a>
+    </header>
+
+    <h2>My Cart</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Total</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+
+        <tbody id="cartData"></tbody>
+    </table>
+
+    <h3 style="text-align:right;">
+        Grand Total: ₹ <span id="grandTotal">0</span>
+    </h3>
+
+    <button id="button" onclick="return goHome()">Back to Home</button>
+
+    <script>
+        var cartItem = JSON.parse(localStorage.getItem('cartItem')) || [];
+        var cartData = document.getElementById('cartData');
+        var grandTotal = 0;
+
+        function loadCart() {
+            cartData.innerHTML = "";
+            grandTotal = 0;
+
+            if (cartItem.length === 0) {
+                cartData.innerHTML = "<tr><td colspan='7'>Cart is Empty</td></tr>";
+                document.getElementById('grandTotal').innerText = 0;
+                return;
+            }
+
+            cartItem.forEach((item, index) => {
+                var itemTotal = item.price * item.qnt; // ✅ per item total
+                grandTotal += itemTotal;
+
+                cartData.innerHTML += `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><img src="${item.image}"></td>
+                    <td>${item.title}</td>
+                    <td>₹${item.price}</td>
+                    <td>
+                        <button onclick="changeQty(${index}, -1)">-</button>
+                        ${item.qnt}
+                        <button onclick="changeQty(${index}, 1)">+</button>
+                    </td>
+                    <td>₹${itemTotal}</td>
+                    <td>
+                        <button onclick="removeItem(${index})">X</button>
+                    </td>
+                </tr>
+            `;
+            });
+
+            document.getElementById('grandTotal').innerText = grandTotal;
+            localStorage.setItem('cartItem', JSON.stringify(cartItem));
+        }
+
+        function changeQty(index, val) {
+            cartItem[index].qnt += val;
+
+            if (cartItem[index].qnt <= 0) {
+                cartItem.splice(index, 1);
+            }
+
+            loadCart();
+        }
+
+        function removeItem(index) {
+            cartItem.splice(index, 1);
+            loadCart();
+        }
+
+        loadCart();
+
+        function goBack() {
+            window.location = 'index.html';
+        }
+    </script>
+
+</body>
+
+</html>

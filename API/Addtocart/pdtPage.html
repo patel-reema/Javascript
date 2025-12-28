@@ -1,54 +1,182 @@
-<p id="cartUser"></p>
+<!DOCTYPE html>
+<html lang="en">
 
-<div>
-    <img src="" id="image" alt="">
-    <div id="addtocart"></div>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
 
-<script>
-    var productId = Number(JSON.parse(localStorage.getItem('productId')));
-
-    fetch(`https://fakestoreapi.com/products/${productId}`)
-        .then(async (res) => {
-            var singlePdt = await res.json();
-            document.getElementById('image').src = singlePdt.image;
-
-            var token = JSON.parse(localStorage.getItem('token'));
-            if (token) {
-                var btn = `<button onclick="return addtocart('${singlePdt.image}', '${singlePdt.title}', '1')">Add to Cart</button>`
-            }
-            else {
-                var btn = `<button onclick="return logIn()">Add to cart</button>`;
-            }
-
-            document.getElementById('addtocart').innerHTML = btn;
-        })
-        .catch((err) => {
-            alert('Something went Wrong!!' + err);
-        })
-
-    var cartItem = JSON.parse(localStorage.getItem('cartItem'));
-    document.getElementById('cartUser').innerHTML = `Cart${cartItem.length}`;
-
-    function addtocart(image, title, qnt) {
-        var cartObj = { 
-            image: image,
-            title: title,
-            qnt: qnt
-         };
-        if (cartItem == undefined) {
-            cartItem = [];
-        }
-        else {
-            cartItem.push(cartObj);
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #3e476c;
+            margin: 0;
+            padding: 20px;
+            color: #d2d6e6;
         }
 
-        localStorage.setItem('cartItem', JSON.stringify(cartItem));
-        document.getElementById('cartUser').innerHTML = `Cart${cartItem.length}`;
-    }
+        header {
+            background: #5c6588;
+            border-radius: 20px;
+            padding: 15px 30px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    function logIn(){
-        window.location = 'logInPage.html';
-    }
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 14px;
+        }
 
-</script>
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            background: white;
+            color: #3e476c;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        #cartUser {
+            text-align: right;
+            font-weight: bold;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+
+        .product-box {
+            max-width: 400px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .product-box img {
+            max-width: 200px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #323b65;
+            color: white;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <a href="index.html">Home</a>
+            <a href="cartPage.html">My Cart</a>
+        </div>
+
+        <a href="logInPage.html" class="login-btn">Login</a>
+    </header>
+
+    <p id="cartUser" onclick="goToCart()" style="cursor:pointer;"></p>
+
+    <div class="product-box">
+        <img id="image" alt="">
+        <div id="addtocart"></div>
+        <button onclick="goBack()">Back to Home</button>
+    </div>
+
+    <script>
+        var productId = JSON.parse(localStorage.getItem('productId'));
+
+        if (!productId) {
+            alert("No product selected");
+            window.location = "index.html";
+        }
+
+        var cartItem = JSON.parse(localStorage.getItem('cartItem')) || [];
+        updateCartCount();
+
+        fetch(`https://fakestoreapi.com/products/${productId}`)
+            .then(res => res.json())
+            .then(singlePdt => {
+                document.getElementById('image').src = singlePdt.image;
+                document.getElementById('image').style.height = "300px";
+
+                var token = localStorage.getItem('token');
+                if (token) {
+                    document.getElementById('addtocart').innerHTML =
+                        `<button onclick="addtocart('${singlePdt.id}','${singlePdt.image}','${singlePdt.title}',${singlePdt.price})">
+                        Add to Cart
+                     </button>`;
+                } else {
+                    document.getElementById('addtocart').innerHTML =
+                        `<button onclick="logIn()">Add to Cart</button>`;
+                }
+            });
+
+        function addtocart(id, image, title, price) {
+
+            var existing = cartItem.find(item => item.id == id);
+
+            if (existing) {
+                existing.qnt += 1
+            } else {
+                cartItem.push({
+                    id: id,
+                    image: image,
+                    title: title,
+                    price: price,
+                    qnt: 1
+                });
+            }
+
+            localStorage.setItem('cartItem', JSON.stringify(cartItem));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            var currentQty = 0;
+
+            cartItem.forEach(item => {
+                if (item.id == productId) {
+                    currentQty = item.qnt;
+                }
+            });
+
+            document.getElementById('cartUser').innerHTML = `Cart: ${currentQty}`;
+        }
+
+        function goToCart() {
+            window.location = "cartPage.html";
+        }
+
+        function logIn() {
+            window.location = "logInPage.html";
+        }
+
+        function goBack() {
+            window.location = 'index.html';
+        }
+    </script>
+
+</body>
+
+</html>
