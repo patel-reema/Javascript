@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="images/icon.png">
+    <title>Bookmyshow</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="showHeader">
+            <div class="logo">
+                <img src="images/logo-Photoroom.png" alt="">
+            </div>
+            <div class="search">
+                <i>🔍</i>
+                <input type="text" placeholder="Search for Movies, Events, Plays & more">
+            </div>
+            <div class="bt">
+                <button class="signIn">Sign in</button>
+                <div class="menu"></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="options">
+        <div class="leftOp">
+            <a href="#">Movies</a>
+        </div>
+        <div class="rightOp">
+            <a href="./movieForm.html">Add Movies</a>
+        </div>
+    </nav>
+
+    <section>
+        <img id="slider" src="images/s1.png" width="1300" height="300">
+    </section>
+
+    <div id="nameMovie" class="movieCont"></div>
+</body>
+
+<script>
+    var slider = [
+        {
+            img: "images/s1.png"
+        },
+        {
+            img: "images/s2.png"
+        },
+        {
+            img: "images/s3.png"
+        }
+    ];
+
+    var s = 0;
+
+    function showSlider() {
+        document.getElementById("slider").src = slider[s].img;
+    }
+
+    function nextSlider() {
+        s++;
+        if (s >= slider.length) {
+            s = 0;
+        }
+        showSlider();
+    }
+
+    showSlider();
+    setInterval(nextSlider, 3000);
+
+    var movieData = JSON.parse(localStorage.getItem("movies")) || [];
+    var nameMovie = document.getElementById("nameMovie");
+    nameMovie.innerHTML = "";
+
+    movieData.forEach(function (m) {
+        var div = document.createElement("div");
+        div.className = "movie-card";
+
+        div.innerHTML = `
+        <img src="${m.image}" alt="${m.name}">
+        <div class="movie-details">
+            <h3>${m.name}</h3>
+            <p><b>Rating:</b> ${m.rating}</p>
+            <p><b>Votes:</b> ${m.voting}</p>
+            <p><b>Time:</b> ${m.time} min</p>
+            <p><b>Genre:</b> ${m.genre}</p>
+            <p><b>Certified:</b> ${m.certified}</p>
+            <p><b>Release:</b> ${m.date}</p>
+            <p><b>Type:</b> ${m.type}</p>
+            <p><b>Language:</b> ${m.language}</p>
+            <p><b>Plot:</b> ${m.plot}</p>
+        </div>
+    `;
+
+        nameMovie.appendChild(div);
+    });
+</script>
+
+</html>

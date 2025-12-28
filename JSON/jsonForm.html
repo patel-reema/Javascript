@@ -1,0 +1,149 @@
+<form method="post" onsubmit="return insertData(event)">
+    <input type="hidden" id="studentID">
+    Enter Name: <input type="text" id="name"><br><br>
+    Enter Age: <input type="number" id="age"><br><br>
+    Select Gender: <input type="radio" name="gender" id="gdMale">Male
+    <input type="radio" name="gender" id="gdFemale">Female <br><br>
+
+    Choose Hobbies: <input type="checkbox" name="hobby" id="hb1">Cycling
+    <input type="checkbox" name="hobby" id="hb2">Drawing
+    <input type="checkbox" name="hobby" id="hb3">Driving
+    <br><br>
+    <input type="submit" value="Submit" id="submit"><br>
+</form>
+
+<p id="res"></p>
+<br><br>
+<div id="dataString"></div>
+
+<script>
+    var data = [];
+
+    fetchFunc();
+    function fetchFunc() {
+        var record = JSON.parse(localStorage.getItem('studentData'));
+        if (record == null) {
+            data = data;
+        } else {
+            data = record;
+        }
+        var tableData = `<table border="1" style='margin=5px'><tr><td>No.</td><td>Name</td><td>Age</td>
+                        <td>Gender</td><td>Hobbies</td><td style='text-align:center'>Actions</td></tr>`
+
+        data.map((v, i) => {
+            tableData += `<tr>`;
+            tableData += `<td>${i + 1}</td>`;
+            tableData += `<td>${v.name}</td>`;
+            tableData += `<td>${v.age}</td>`;
+            tableData += `<td>${v.gender ? gender : ''}</td>`;
+            tableData += `<td>${v.hobby ? hobby : ''}</td>`;
+            tableData += `<td><button onclick="return deleteData(${i})">Delete</button>`;
+            tableData += ` | <button onclick="return updateData(${i})">Update</button></td>`;
+            tableData += `</tr>`;
+        })
+        tableData += `</table>`;
+        document.getElementById('dataString').innerHTML = tableData;
+    }
+
+    function updateData(pos) {
+        document.getElementById('studentID').value = pos;
+        document.getElementById('name').value = data[pos]['name'];
+        document.getElementById('age').value = data[pos]['age'];
+        document.getElementById('submit').value = 'Update';
+
+        if (data[pos][hobby].includes('Cycling')) {
+            document.getElementById('hb1').checked = 'checked';
+        } else {
+            document.getElementById('hb1').checked = '';
+        }
+        if (data[pos][hobby].includes('Drawing')) {
+            document.getElementById('hb2').checked = 'checked';
+        } else {
+            document.getElementById('hb2').checked = '';
+        }
+        if (data[pos][hobby].includes('Driving')) {
+            document.getElementById('hb3').checked = 'checked';
+        } else {
+            document.getElementById('hb3').checked = '';
+        }
+
+    }
+
+    function deleteData(pos) {
+        data.splice(pos, 1);
+
+        startFunc();
+        fetchFunc();
+    }
+
+    function startFunc() {
+        var dataString = JSON.stringify(data);
+        localStorage.setItem('studentData', dataString);
+    }
+
+    function insertData(e) {
+        e.preventDefault();
+        var name = document.querySelector('#name').value;
+        var age = document.querySelector('#age').value;
+        var studentID = document.querySelector('#studentID').value;
+        var gdMale = document.querySelector('#gdMale').checked;
+        var gdFemale = document.querySelector('#gdFemale').checked;
+        var gender = '';
+
+        if (gdMale) {
+            document.getElementById('gdMale').value;
+        } else if (gdFemale) {
+            document.getElementById('gdFemale').value;
+        } else {
+            gender = '';
+        }
+
+        var hb1 = document.getElementById('hb1').checked;
+        var hb2 = document.getElementById('hb2').checked;
+        var hb3 = document.getElementById('hb3').checked;
+        var hobby = [];
+
+        if (hb1) {
+            push(document.getElementById('hb1').value);
+        }
+        if (hb2) {
+            push(document.getElementById('hb2').value);
+        }
+        if (hb3) {
+            push(document.getElementById('hb3').value);
+        }
+
+        var obj = {
+            name: name,
+            age: age,
+            gender: gender,
+            hobby: hobby
+        }
+
+        if (studentID == '') {
+            data.push(obj);
+            document.getElementById('res').innerHTML = 'Record Inserted';
+        } else {
+            data[studentID] = obj;
+            document.getElementById('res').innerHTML = 'Record Updated';
+        }
+
+        startFunc();
+        fetchFunc();
+
+        document.querySelector('#name').value = '';
+        document.querySelector('#age').value = '';
+        document.querySelector('#studentID').value = '';
+        document.querySelector('#gdMale').checked = '';
+        document.querySelector('#gdFemale').checked = '';
+        document.querySelector('#hb1').checked = '';
+        document.querySelector('#hb2').checked = '';
+        document.querySelector('#hb3').checked = '';
+        document.querySelector('#submit').value = 'Submit';
+
+        document.getElementById('res').style.display = 'block';
+        setTimeout(() => {
+            document.getElementById('res').style.display = 'none';
+        }, 1000);
+    }
+</script>

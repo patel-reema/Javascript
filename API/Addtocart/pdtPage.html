@@ -1,0 +1,54 @@
+<p id="cartUser"></p>
+
+<div>
+    <img src="" id="image" alt="">
+    <div id="addtocart"></div>
+</div>
+
+<script>
+    var productId = Number(JSON.parse(localStorage.getItem('productId')));
+
+    fetch(`https://fakestoreapi.com/products/${productId}`)
+        .then(async (res) => {
+            var singlePdt = await res.json();
+            document.getElementById('image').src = singlePdt.image;
+
+            var token = JSON.parse(localStorage.getItem('token'));
+            if (token) {
+                var btn = `<button onclick="return addtocart('${singlePdt.image}', '${singlePdt.title}', '1')">Add to Cart</button>`
+            }
+            else {
+                var btn = `<button onclick="return logIn()">Add to cart</button>`;
+            }
+
+            document.getElementById('addtocart').innerHTML = btn;
+        })
+        .catch((err) => {
+            alert('Something went Wrong!!' + err);
+        })
+
+    var cartItem = JSON.parse(localStorage.getItem('cartItem'));
+    document.getElementById('cartUser').innerHTML = `Cart${cartItem.length}`;
+
+    function addtocart(image, title, qnt) {
+        var cartObj = { 
+            image: image,
+            title: title,
+            qnt: qnt
+         };
+        if (cartItem == undefined) {
+            cartItem = [];
+        }
+        else {
+            cartItem.push(cartObj);
+        }
+
+        localStorage.setItem('cartItem', JSON.stringify(cartItem));
+        document.getElementById('cartUser').innerHTML = `Cart${cartItem.length}`;
+    }
+
+    function logIn(){
+        window.location = 'logInPage.html';
+    }
+
+</script>

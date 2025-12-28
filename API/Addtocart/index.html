@@ -1,0 +1,27 @@
+<div id="pdtData" style="display: flex; flex-wrap: wrap;"></div>
+
+<script>
+    fetch('https://fakestoreapi.com/products')
+        .then(async res => {
+            var productList = await res.json();
+            var pdt = '';
+
+            productList.map((v) => {
+                pdt += `<a href="javascript:void(0)" style='text-decoration: none; ' onclick="return pdtPage('${v.id}')"><div style="width: 200px; height: 250px; background-color: aqua; margin: 5px; padding: 10px;">`
+                pdt += `<img src="${v.image}" height="100px" width="100px" style="margin: 8px;" alt="">`
+                pdt += `<h2 style='margin: 5px; font-size: 14px'>${v.title}</h2>`
+                pdt += `<h2>Rs.${v.price}</h2>`
+                pdt += `</div></a>`
+            })  
+
+            document.getElementById('pdtData').innerHTML = pdt;
+        })
+        .catch((err) => {
+            alert('Something went Wrong!!' + err);
+        })
+
+    function pdtPage(id) {
+        localStorage.setItem('productId', JSON.stringify(id));
+        window.location = 'pdtPage.html';
+    }
+</script>

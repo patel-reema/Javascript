@@ -1,0 +1,112 @@
+<form onsubmit='return validationForm()'>
+
+    Name:
+    <input type='text' id='name'><br>
+    <span id='errName' style='color:red'></span><br><br>
+
+    Age:
+    <input type='number' id='age'><br>
+    <span id='errAge' style='color:red'></span><br><br>
+
+    Address:
+    <input type='text' id='add'><br>
+    <span id='errAdd' style='color:red'></span><br><br>
+
+    Email:
+    <input type='email' id='email'><br>
+    <span id='errEmail' style='color:red'></span><br><br>
+
+    Password:
+    <input type='password' id='pass'><br>
+    <span id='errPass' style='color:red'></span><br><br>
+
+    Mobile:
+    <input type='number' id='mobile'><br>
+    <span id='errMobile' style='color:red'></span><br><br>
+
+    City:
+    <input type='text' id='city'><br>
+    <span id='errCity' style='color:red'></span><br><br>
+
+    <button type='submit'>Submit</button>
+</form>
+
+
+<script>
+    function validationForm() {
+        document.getElementById('errName').innerHTML = '';
+        document.getElementById('errAge').innerHTML = '';
+        document.getElementById('errAdd').innerHTML = '';
+        document.getElementById('errEmail').innerHTML = '';
+        document.getElementById('errPass').innerHTML = '';
+        document.getElementById('errMobile').innerHTML = '';
+        document.getElementById('errCity').innerHTML = '';
+
+        var name = document.getElementById('name').value.trim();
+        var age = Number(document.getElementById('age').value);
+        var add = document.getElementById('add').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var pass = document.getElementById('pass').value;
+        var mobile = document.getElementById('mobile').value;
+        var city = document.getElementById('city').value.trim();
+
+        var istrue = true;
+
+        if (name == '') {
+            document.getElementById('errName').innerHTML = 'Name is required';
+            istrue = false;
+        } else if (name.length < 3) {
+            document.getElementById('errName').innerHTML = 'Name must be at least 3 characters';
+            istrue = false;
+        }
+
+        if (!age) {
+            document.getElementById('errAge').innerHTML = 'Age is required';
+            istrue = false;
+        } else if (age < 1 || age > 120) {
+            document.getElementById('errAge').innerHTML = 'Age must be between 1 and 120';
+            istrue = false;
+        }
+
+        if (add == '') {
+            document.getElementById('errAdd').innerHTML = 'Address is required';
+            istrue = false;
+        } else if (add.length < 5) {
+            document.getElementById('errAdd').innerHTML = 'Address must be minimum 5 characters';
+            istrue = false;
+        }
+
+        if (email == '') {
+            document.getElementById('errEmail').innerHTML = 'Email is required';
+            istrue = false;
+        } else if (!email.includes('@') || !email.includes('.')) {
+            document.getElementById('errEmail').innerHTML = 'Enter a true email address';
+            istrue = false;
+        }
+
+        if (pass == '') {
+            document.getElementById('errPass').innerHTML = 'Password is required';
+            istrue = false;
+        } else if (pass.length < 6) {
+            document.getElementById('errPass').innerHTML = 'Password must be at least 6 characters';
+            istrue = false;
+        }
+
+        if (mobile == '') {
+            document.getElementById('errMobile').innerHTML = 'Mobile number is required';
+            istrue = false;
+        } else if (mobile.length != 10) {
+            document.getElementById('errMobile').innerHTML = 'Mobile must be exactly 10 digits';
+            istrue = false;
+        }
+
+        if (city == '') {
+            document.getElementById('errCity').innerHTML = 'City is required';
+            istrue = false;
+        }
+        if (istrue) {
+            alert('Form Submitted Successfully!!');
+        }
+        return istrue;
+    }
+</script>

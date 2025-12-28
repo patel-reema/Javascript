@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            /* stack vertically */
+            align-items: center;
+            /* horizontal center */
+            justify-content: flex-start;
+            padding-top: 60px;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            /* space between search and card */
+        }
+
+        input {
+            padding: 12px 14px;
+            width: 260px;
+            font-size: 16px;
+            border-radius: 8px 0 0 8px;
+            border: none;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            border-radius: 0 8px 8px 0;
+            border: none;
+            background: #ff9800;
+            color: #fff;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #e68900;
+            transform: translateY(-1px);
+        }
+
+        #res {
+            display: none;
+            /* hide until search */
+            width: 320px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 14px;
+            text-align: center;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        #res h3 {
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 20px;
+        }
+
+        #res p {
+            margin: 8px 0;
+            color: #555;
+            font-size: 15px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-container">
+        <input type="search" id="city" placeholder="Enter your city">
+        <button onclick="getWeather()">SHOW</button>
+    </div>
+
+    <div id="res"></div>
+
+
+    <script>
+        function getWeather() {
+            var city = document.getElementById("city").value;
+            var result = document.getElementById("res");
+
+            if (city === "") {
+                result.innerHTML = "Please enter a city name";
+                return;
+            }
+
+            fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`)
+                .then(async (res) => {
+                    return await res.json();
+                })
+                .then((geoData) => {
+
+                    var lat = geoData.results[0].latitude;
+                    var lon = geoData.results[0].longitude;
+
+                    return fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m`
+                    );
+                })
+                .then(async (res) => {
+                    return await res.json();
+                })
+                .then((weatherData) => {
+                    result.style.display = "block";
+
+                    var weatherCode = weatherData.current_weather.weathercode;
+                    var humidityPer = weatherData.hourly.relativehumidity_2m[0];
+
+                    var weatherCon = "";
+
+                    if (weatherCode == 0) {
+                        weatherCon = "Clear";
+                    } else if (weatherCode <= 3) {
+                        weatherCon = "Cloudy";
+                    } else if (weatherCode <= 48) {
+                        weatherCon = "Foggy";
+                    } else if (weatherCode <= 67) {
+                        weatherCon = "Rainy";
+                    } else if (weatherCode <= 77) {
+                        weatherCon = "Snowy";
+                    } else {
+                        weatherCon = "Stormy";
+                    }
+
+                    result.innerHTML = `
+                        <h3>${city}</h3>
+                        <p>Temperature: ${weatherData.current_weather.temperature} °C</p>
+                        <p>Humidity: ${humidityPer}%</p>
+                        <p>Condition: ${weatherCon}</p>
+                        <p>Wind Speed: ${weatherData.current_weather.windspeed} km/h</p>
+                        `;
+                })
+                .catch(() => {
+                    result.style.display = "block";
+                    result.innerHTML = "City not found";
+                });
+        }
+
+    </script>
+</body>
+
+</html>
