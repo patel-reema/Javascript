@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #2b2fdc, #9b3bdc);
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #fff;
+            padding: 20px;
+            width: 360px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        select {
+            margin-bottom: 15px;
+        } 
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        button {
+            background: #6a6ff2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        #msg {
+            margin-top: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #taskString {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+            background: #f6f7fb;
+            padding: 25px;
+            border-radius: 18px;
+        }
+
+        .task-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .task-title {
+            padding: 18px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .high {
+            background: #c7f5d9;
+        }
+
+        .medium {
+            background: #cfe4ff;
+        }
+
+        .low {
+            background: #f1d9ff;
+        }
+
+        .task-card p {
+            font-size: 13px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .dates {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        .stage {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .complete {
+            background: #d8f5e3;
+            color: #2e8b57;
+        }
+
+        .pending {
+            background: #fff1b8;
+            color: #9a7b00;
+        }
+
+        .progress {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .actions button {
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Task Board</h1>
+
+    <form action="" onsubmit="return addTask(event)">
+        <input type="hidden" id="taskid">
+
+        Enter title:
+        <input type="text" id="title">
+
+        Enter description:
+        <input type="text" id="description">
+
+        Start date:
+        <input type="date" id="startDate">
+
+        End date:
+        <input type="date" id="endDate">
+
+        Current stage:
+        <select id="stage">
+            <option value="">---select---</option>
+            <option value="complete">Complete</option>
+            <option value="progress">In progress</option>
+            <option value="pending">Pending</option>
+        </select>
+
+        Priority:
+        <input type="radio" name="priority" value="high"> High
+        <input type="radio" name="priority" value="medium"> Medium
+        <input type="radio" name="priority" value="low"> Low
+
+        <button type="submit" id="submit">Add Task</button>
+        <div id="msg"></div>
+    </form>
+
+    <div id="taskString"></div>
+
+    <script>
+        var data = JSON.parse(localStorage.getItem("taskInfo")) || [];
+
+        taskForm();
+
+        function taskForm() {
+            var html = "";
+
+            data.map((v, i) => {
+                html += `
+                <div class="task-card">
+                    <div class="task-title ${v.priority}">${v.title}</div>
+                    <p>${v.description}</p>
+
+                    <div class="dates">
+                        <span>${v.startDate}</span>
+                        <span>${v.endDate}</span>
+                    </div>
+
+                    <span class="stage ${v.stage}">${v.stage.toUpperCase()}</span>
+
+                    <div class="actions">
+                        <button onclick="updateTask(${i})">Update</button>
+                        <button onclick="deleteTask(${i})">Delete</button>
+                    </div>
+                </div>
+            `;
+            });
+
+            document.getElementById("taskString").innerHTML = html;
+        }
+
+        function startTask() {
+            localStorage.setItem("taskInfo", JSON.stringify(data));
+        }
+
+        function addTask(e) {
+            e.preventDefault();
+
+            var task = {
+                title: title.value,
+                description: description.value,
+                startDate: startDate.value,
+                endDate: endDate.value,
+                stage: stage.value,
+                priority: document.querySelector('input[name="priority"]:checked')?.value || ""
+            };
+
+            var id = taskid.value;
+            if (id == "") data.push(task);
+            else data[id] = task;
+
+            startTask();
+            taskForm();
+            e.target.reset();
+            taskid.value = "";
+        }
+
+        function updateTask(pos) {
+            title.value = data[pos].title;
+            description.value = data[pos].description;
+            startDate.value = data[pos].startDate;
+            endDate.value = data[pos].endDate;
+            stage.value = data[pos].stage;
+            document.querySelector(`input[value="${data[pos].priority}"]`).checked = true;
+            taskid.value = pos;
+        }
+
+        function deleteTask(pos) {
+            data.splice(pos, 1);
+            startTask();
+            taskForm();
+        }
+    </script>
+
+</body>
+
+</html>
