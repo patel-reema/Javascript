@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Budget Tracker</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Budget Tracker</h2>
+
+    Date: <input type="date" id="date"><br><br>
+    Description: <input type="text" id="desc"><br><br>
+    Amount: <input type="number" id="amount"><br><br>
+
+    <button onclick="addExpense()">Add Expense</button>
+    <button onclick="resetData()">Reset</button>
+
+    <h3>Expense List</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <h3>Total Expense: ₹ <span id="total">0</span></h3>
+
+    <script>
+
+        let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+
+        displayData();
+
+        function addExpense() {
+
+            let date = document.getElementById("date").value;
+            let desc = document.getElementById("desc").value;
+            let amount = Number(document.getElementById("amount").value);
+
+            if (date == "" || desc == "" || amount == "") {
+                alert("Please fill all fields");
+                return;
+            }
+
+            if (amount <= 0) {
+                alert("Amount must be positive");
+                return;
+            }
+
+            let expense = {
+                date,
+                desc,
+                amount
+            };
+
+            expenses.push(expense);
+
+            localStorage.setItem("expenses", JSON.stringify(expenses));
+
+            displayData();
+
+            clearFields();
+
+        }
+
+        function displayData() {
+
+            let table = document.getElementById("tableBody");
+
+            table.innerHTML = "";
+
+            let total = 0;
+
+            expenses.forEach(function (item) {
+
+                total += item.amount;
+
+                let row = `
+<tr>
+<td>${item.date}</td>
+<td>${item.desc}</td>
+<td>${item.amount}</td>
+</tr>
+`;
+
+                table.innerHTML += row;
+
+            });
+
+            document.getElementById("total").innerText = total;
+
+        }
+
+        function clearFields() {
+
+            document.getElementById("date").value = "";
+            document.getElementById("desc").value = "";
+            document.getElementById("amount").value = "";
+
+        }
+
+        function resetData() {
+
+            expenses = [];
+
+            localStorage.removeItem("expenses");
+
+            displayData();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

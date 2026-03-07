@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Invoice Generator</title>
+
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Invoice Generator</h2>
+
+    Item Name: <input type="text" id="name"><br><br>
+    Quantity: <input type="number" id="qty"><br><br>
+    Price: <input type="number" id="price"><br><br>
+    Discount %: <input type="number" id="discount"><br><br>
+
+    <button onclick="addItem()">Add Item</button>
+    <button onclick="resetInvoice()">Reset</button>
+
+    <h3>Invoice</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Discount %</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+    </table>
+
+    <br>
+
+    <h3>Subtotal: ₹ <span id="subtotal">0</span></h3>
+    <h3>GST (18%): ₹ <span id="gst">0</span></h3>
+    <h3>Grand Total: ₹ <span id="grandTotal">0</span></h3>
+
+    <script>
+
+        let items = JSON.parse(localStorage.getItem("items")) || [];
+
+        displayItems();
+
+        function addItem() {
+
+            let name = document.getElementById("name").value;
+            let qty = Number(document.getElementById("qty").value);
+            let price = Number(document.getElementById("price").value);
+            let discount = Number(document.getElementById("discount").value) || 0;
+
+            if (name == "" || qty == "" || price == "") {
+                alert("Fill all fields");
+                return;
+            }
+
+            if (qty <= 0 || price <= 0) {
+                alert("Invalid values");
+                return;
+            }
+
+            let total = qty * price;
+
+            let item = {
+                name,
+                qty,
+                price,
+                discount,
+                total
+            };
+
+            items.push(item);
+
+            localStorage.setItem("items", JSON.stringify(items));
+
+            displayItems();
+
+            clearFields();
+
+        }
+
+        function displayItems() {
+
+            let table = document.getElementById("tableBody");
+            table.innerHTML = "";
+
+            let subtotal = 0;
+
+            items.forEach(function (item) {
+
+                let discountAmount = item.total * item.discount / 100;
+                let final = item.total - discountAmount;
+
+                subtotal += final;
+
+                let row = `
+<tr>
+<td>${item.name}</td>
+<td>${item.qty}</td>
+<td>${item.price}</td>
+<td>${item.discount}%</td>
+<td>${item.total}</td>
+</tr>
+`;
+
+                table.innerHTML += row;
+
+            });
+
+            let gst = subtotal * 0.18;
+            let grandTotal = subtotal + gst;
+
+            document.getElementById("subtotal").innerText = subtotal.toFixed(2);
+            document.getElementById("gst").innerText = gst.toFixed(2);
+            document.getElementById("grandTotal").innerText = grandTotal.toFixed(2);
+
+        }
+
+        function clearFields() {
+
+            document.getElementById("name").value = "";
+            document.getElementById("qty").value = "";
+            document.getElementById("price").value = "";
+            document.getElementById("discount").value = "";
+
+        }
+
+        function resetInvoice() {
+
+            items = [];
+            localStorage.removeItem("items");
+
+            displayItems();
+
+        }
+
+    </script>
+
+</body>
+
+</html>

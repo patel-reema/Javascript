@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quiz App</title>
+</head>
+
+<body>
+
+    <h2>Quiz App</h2>
+
+    <h3 id="question"></h3>
+
+    <div id="options"></div>
+
+    <h3>Time Left: <span id="timer">10</span></h3>
+
+    <button onclick="nextQuestion()">Next</button>
+    <button onclick="resetQuiz()">Reset</button>
+
+    <h3 id="score"></h3>
+
+    <script>
+
+        let questions = [
+
+            {
+                question: "What is HTML?",
+                options: ["Programming", "Markup", "Database", "Server"],
+                answer: "Markup"
+            },
+
+            {
+                question: "CSS is used for?",
+                options: ["Styling", "Server", "Database", "Logic"],
+                answer: "Styling"
+            },
+
+            {
+                question: "JavaScript is?",
+                options: ["Language", "Browser", "OS", "Editor"],
+                answer: "Language"
+            },
+            
+            {
+                question: "Which company developed JavaScript?",
+                options: ["Microsoft", "Netscape", "Google", "Apple"],
+                answer: "Netscape"
+            },
+
+            {
+                question: "Which symbol is used for comments in JavaScript?",
+                options: ["//", "/* */", "#", "<!-- -->"],
+                answer: "//"
+            }
+
+
+
+        ]
+
+        let index = 0
+        let score = 0
+        let time = 10
+        let timer
+
+        loadQuestion()
+
+        function loadQuestion() {
+
+            let q = questions[index]
+
+            document.getElementById("question").innerText = q.question
+
+            let html = ""
+
+            for (let i = 0; i < q.options.length; i++) {
+
+                html += `<input type="radio" name="opt" value="${q.options[i]}"> ${q.options[i]} <br>`
+
+            }
+
+            document.getElementById("options").innerHTML = html
+
+            startTimer()
+
+        }
+
+        function startTimer() {
+
+            time = 10
+
+            document.getElementById("timer").innerText = time
+
+            timer = setInterval(function () {
+
+                time--
+
+                document.getElementById("timer").innerText = time
+
+                if (time == 0) {
+
+                    clearInterval(timer)
+
+                    nextQuestion()
+
+                }
+
+            }, 1000)
+
+        }
+
+        function nextQuestion() {
+
+            clearInterval(timer)
+
+            let selected = document.querySelector('input[name="opt"]:checked')
+
+            if (selected) {
+
+                if (selected.value == questions[index].answer) {
+
+                    score++
+
+                }
+
+            }
+
+            index++
+
+            if (index < questions.length) {
+
+                loadQuestion()
+
+            }
+            else {
+
+                document.getElementById("question").innerText = "Quiz Finished"
+
+                document.getElementById("options").innerHTML = ""
+
+                document.getElementById("score").innerText = "Score: " + score
+
+                localStorage.setItem("quizScore", score)
+
+            }
+
+        }
+
+        function resetQuiz() {
+
+            index = 0
+            score = 0
+
+            localStorage.removeItem("quizScore")
+
+            document.getElementById("score").innerText = ""
+
+            loadQuestion()
+
+        }
+
+    </script>
+
+</body>
+
+</html>
